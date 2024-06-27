@@ -32,42 +32,38 @@ export default function Listbox() {
     },
   ];
 
-  const data: DataType[] = [];
-  // for (let i = 1; i < 100; i++) {
-  //   data.push({
-  //     key: i,
-  //     writer: `익명 ${i}`,
-  //     contentNum: i,
-  //     content: `게시글 ${i}`,
-  //     viewCount: 0,
-  //   });
-  // }
+  const initialdata: DataType[] = [];
+  for (let i = 1; i < 100; i++) {
+    initialdata.push({
+      key: i,
+      writer: `익명 ${i}`,
+      contentNum: i,
+      content: `게시글 ${i}`,
+      viewCount: 0,
+    });
+  }
+  const [data, setData] = useState<DataType[]>(initialdata);
+
+  const handleRowClick = (index: number) => {
+    const newData = [...data];
+    newData[index].viewCount += 1;
+    setData(newData);
+  };
 
   // const [viewCount, setviewCount] = useState(0);
 
-  data.push({
-    key: 1,
-    writer: `익명`,
-    contentNum: 1,
-    content: `게시글1`,
-    viewCount: 0,
-  });
   return (
     <>
       <Table
         columns={columns}
         dataSource={data}
-        //   onRow={(record, index) => {
-        //     return {
-        //       onClick: (event) => {
-        //         setviewCount(() => {
-        //           data[Number(index)].viewCount++;
-        //           return viewCount + 1;
-        //         });
-        //       },
-        //     };
-        //   }
-        // }
+        onRow={(record, index) => {
+          return {
+            onClick: () => {
+              handleRowClick(index!);
+            },
+          };
+        }}
         // pagination={{ pageSize: 50 }}
         // scroll={{ y: 240 }}
       />
