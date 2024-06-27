@@ -24,7 +24,7 @@ export default function Listbox() {
         viewCount: 0,
       });
     }
-
+    console.log("");
     setInitialdate(data);
   }, []);
 
