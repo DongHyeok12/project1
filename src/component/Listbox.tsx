@@ -1,5 +1,5 @@
-import { Table, TableColumnsType } from "antd";
-import { useCallback, useEffect, useState } from "react";
+import { Table } from "antd";
+import { useEffect, useState } from "react";
 import { columns } from "../constant";
 
 export interface DataType {
