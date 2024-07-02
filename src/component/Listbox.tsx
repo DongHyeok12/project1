@@ -7,7 +7,7 @@ export default function Listbox() {
     contentNum: number;
     content: string;
     writer: string;
-    viewCount: number;
+    ggulCount: number;
   }
   const columns: TableColumnsType<DataType> = [
     {
@@ -39,14 +39,14 @@ export default function Listbox() {
       writer: `익명 ${i}`,
       contentNum: i,
       content: `게시글 ${i}`,
-      viewCount: 0,
+      ggulCount: 0,
     });
   }
   const [data, setData] = useState<DataType[]>(initialdata);
 
   const handleRowClick = (index: number) => {
     const newData = [...data];
-    newData[index].viewCount += 1;
+    newData[index].ggulCount += 1;
     setData(newData);
   };
 

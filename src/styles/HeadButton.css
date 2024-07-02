@@ -1,0 +1,12 @@
+.HeadButton {
+  background-color: yellow;
+  color: orange;
+}
+.HeadButtonHover {
+  background-color: "#FFF999";
+  color: orange;
+}
+.HeadButtonClick {
+  background-color: "#FFD400";
+  color: orange;
+}
