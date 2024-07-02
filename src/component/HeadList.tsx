@@ -8,8 +8,8 @@ export default function HeadList() {
       "mouseover",
       (event: Event) => {
         const target = event.target as HTMLElement;
-        target.style.color = "orange";
-        target.style.backgroundColor = "#FFF999";
+
+        target.className = "tableTestHover";
       },
       false
     );
@@ -18,8 +18,8 @@ export default function HeadList() {
       "mouseout",
       (event: Event) => {
         const target = event.target as HTMLElement;
-        target.style.color = "orange";
-        target.style.backgroundColor = "FDFD96";
+
+        target.style.backgroundColor = "";
       },
       false
     );
@@ -27,22 +27,22 @@ export default function HeadList() {
 
   return (
     <>
-      <div id="navBar">
-        <ul id="menuList">
-          <li>
+      <table id="navBar">
+        <thead id="menuList">
+          <td>
             <a href="#home"> Home </a>
-          </li>
-          <li>
+          </td>
+          <td>
             <a href="#about"> About </a>
-          </li>
-          <li>
+          </td>
+          <td>
             <a href="#window1"> Like </a>
-          </li>
-          <li>
+          </td>
+          <td>
             <a href="#window2"> Stack </a>
-          </li>
-        </ul>
-      </div>
+          </td>
+        </thead>
+      </table>
     </>
   );
 }

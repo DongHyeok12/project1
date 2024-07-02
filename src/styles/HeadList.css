@@ -5,7 +5,7 @@
   width: 30px;
   border: 2px;
 }
-.tableTest:hover {
+.tableTestHover {
   background-color: "#FFF999";
   color: orange;
 }
@@ -13,7 +13,7 @@
   background-color: "#FFD400";
   color: orange;
 }
-#navBar ul {
+#navBar thead {
   display: flex;
   overflow-x: hidden;
   justify-content: center;
@@ -22,13 +22,11 @@
   position: fixed;
 }
 
-#navBar li {
+#navBar td {
   display: inline-block;
   padding: 10px 40px 10px 40px;
   font-size: 20px;
   font-weight: bold;
-  border: 1px solid red;
-  color: orange;
   background-color: yellow;
 }
 
