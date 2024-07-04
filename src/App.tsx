@@ -1,19 +1,23 @@
 import React from "react";
-import Listbox from "./component/Listbox";
-import HeadLabel from "./component/HeadLabel";
-import HeadButton from "./component/HeadButton";
-import UpButton from "./component/UpButton";
-import BtnTest from "./component/BntTest";
-import HeadList from "./component/HeadList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import HeadList from "./component/Header";
+import HomePage from "./page";
+import AboutPage from "./page/about";
+import ContactPage from "./page/contact";
 
 function App() {
   return (
     <>
       {/* <HeadLabel /> */}
-      {/* <HeadButton /> */}
-      <UpButton />
-      <HeadList />
-      {/* <BtnTest /> */}
+      <Router>
+        <HeadList />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </Router>
+      {/* <Footer /> */}
       {/* <Listbox /> */}
     </>
   );

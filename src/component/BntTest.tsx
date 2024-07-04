@@ -5,7 +5,9 @@ export default function BtnTest() {
     <>
       <table>
         <thead>
-          <td className="tableTest">helo</td>
+          <tr>
+            <th className="tableTest">hello</th>
+          </tr>
         </thead>
       </table>
     </>
