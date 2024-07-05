@@ -39,3 +39,7 @@
 .NavBar:hover {
   background-color: #0056b3; /* 호버시 배경색 */
 }
+
+.NavBar-Select {
+  color: pink;
+}
