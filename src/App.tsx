@@ -1,24 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HeadList from "./component/Header";
+import Header from "./component/Header";
 import HomePage from "./page";
-import AboutPage from "./page/about";
-import ContactPage from "./page/contact";
+import HumorPage from "./page/Humor";
+import FreePage from "./page/Free";
 
 function App() {
   return (
     <>
-      {/* <HeadLabel /> */}
       <Router>
-        <HeadList />
+        <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/humor" element={<HumorPage />} />
+          <Route path="/free" element={<FreePage />} />
         </Routes>
       </Router>
-      {/* <Footer /> */}
       {/* <Listbox /> */}
+      {/* <Footer /> */}
     </>
   );
 }
