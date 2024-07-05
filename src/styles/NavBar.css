@@ -1,13 +1,13 @@
 .NavBar {
-  background-color: #ffcf40;
-  color: brown;
+  text-decoration-line: none;
+  color: #212121;
   font-weight: bolder;
   font-size: 20px;
   height: 40px;
-  width: 15%;
+  width: 30px;
   border: 0px;
   contain: content;
 }
 .NavBar:hover {
-  background-color: #ffe289;
+  color: #606060;
 }
