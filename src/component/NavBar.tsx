@@ -1,4 +1,5 @@
-import "../styles/NavBar.css";
+import React from "react";
+import "../styles/styles.css"; // 스타일 시트 임포트
 
 export default function NavBar() {
   return (
