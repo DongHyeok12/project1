@@ -51,4 +51,10 @@ a:active {
 
 .NavBar-Select {
   color: pink;
+  font-weight: bolder;
+  font-size: 20px;
+  height: 40px;
+  width: 30px;
+  border: 0px;
+  contain: content;
 }
