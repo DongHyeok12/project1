@@ -14,9 +14,9 @@ a:active {
 
 /* Header 스타일 */
 .header {
-  background-color: #f8f9fa; /* 배경색 */
+  background-color: white; /* 배경색 */
   padding: 20px; /* 패딩 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  border-bottom: 2px solid gold;
   display: flex;
   justify-content: space-between; /* 좌우 여백 */
   align-items: center; /* 수직 중앙 정렬 */
@@ -37,11 +37,10 @@ a:active {
 /* NavBar.css */
 
 .NavBar {
+  margin-right: 35px;
   color: #212121;
   font-weight: bolder;
   font-size: 20px;
-  height: 40px;
-  width: 30px;
   border: 0px;
   contain: content;
 }
@@ -49,12 +48,13 @@ a:active {
   color: #606060;
 }
 
-.NavBar-Select {
-  color: pink;
-  font-weight: bolder;
-  font-size: 20px;
-  height: 40px;
-  width: 30px;
-  border: 0px;
-  contain: content;
+.NavBar.selected {
+  color: #ffb703;
+}
+
+/* logo.css */
+.Logo {
+  margin-right: 35px;
+  width: 50px;
+  height: 50px;
 }

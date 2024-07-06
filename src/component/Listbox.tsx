@@ -1,6 +1,6 @@
 import { Table } from "antd";
 import { useEffect, useState } from "react";
-import { columns } from "../constant";
+import { columns } from "../contants";
 
 export interface DataType {
   key: React.Key;

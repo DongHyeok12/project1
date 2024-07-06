@@ -12,16 +12,21 @@ export default function NavBar() {
   ];
 
   return (
-    <div>
-      {links.map(({ path, label }) => (
-        <a
-          key={path}
-          className={`NavBar${location.pathname === path ? "-Select" : ""}`}
-          href={path}
-        >
-          {label}
+    <>
+      <div>
+        <a href="/">
+          <img className="Logo" src="/img/logo.jpg" alt="꿀벌" />
         </a>
-      ))}
-    </div>
+        {links.map(({ path, label }) => (
+          <a
+            key={path}
+            className={`NavBar${location.pathname === path ? " selected" : ""}`}
+            href={path}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+    </>
   );
 }
