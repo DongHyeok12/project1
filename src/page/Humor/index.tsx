@@ -1,5 +1,11 @@
+import ListBox from "../../component/ListBox";
+
 const HumorPage = () => {
-  return <>유머</>;
+  return (
+    <>
+      <ListBox />
+    </>
+  );
 };
 
 export default HumorPage;
