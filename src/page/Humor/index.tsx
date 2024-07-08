@@ -1,11 +1,11 @@
-import ListBox from "../../component/ListBox";
-import WriteButton from "../../component/WriteButton";
+import SubHeadLayout from "../../component/SubHeadLayout";
 
 const HumorPage = () => {
   return (
     <>
-      <WriteButton />
-      <ListBox />
+      <SubHeadLayout>
+        <a>aa</a>
+      </SubHeadLayout>
     </>
   );
 };

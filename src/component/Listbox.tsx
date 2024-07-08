@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import "../styles/styles.css";
 
 const ListBox = () => {
   const location = useLocation();
@@ -6,7 +7,7 @@ const ListBox = () => {
   return (
     <>
       <ul>
-        <li>
+        <li className="ListBox">
           <a href={`${location.pathname}/nn`}>hello</a>
         </li>
       </ul>

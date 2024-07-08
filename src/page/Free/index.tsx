@@ -1,5 +1,13 @@
+import SubHeadLayout from "../../component/SubHeadLayout";
+
 const FreePage = () => {
-  return <>자유게시판</>;
+  return (
+    <>
+      <SubHeadLayout>
+        <a>aa</a>
+      </SubHeadLayout>
+    </>
+  );
 };
 
 export default FreePage;

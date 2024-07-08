@@ -65,7 +65,6 @@ a:active {
 /* WriteButton.css */
 .WriteButton {
   border: 0px solid gold;
-
   border-radius: 25px;
   height: 40px;
   width: 90px;
@@ -81,4 +80,39 @@ a:active {
 }
 .WriteButton:active {
   background-color: goldenrod;
+}
+
+/* ListBox.css */
+.ListBox {
+  display: grid;
+}
+
+/* SubHead.css */
+.SubHead {
+  background-color: white; /* 배경색 */
+  padding: 20px; /* 패딩 */
+  border-bottom: 15px solid gold;
+  justify-content: space-between; /* 좌우 여백 */
+  align-items: center; /* 수직 중앙 정렬 */
+}
+
+.SubHead_a {
+  color: gold;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.SubHead_a:hover {
+  color: gold;
+}
+/* HeaderLayout 스타일 */
+.SubHeadLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 전체 화면 높이 */
+}
+
+.SubHeadLayout main {
+  /* flex: 1; 남은 공간을 채우도록 */
+  padding: 20px; /* 패딩 */
 }
