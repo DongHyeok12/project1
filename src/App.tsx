@@ -4,6 +4,7 @@ import HomePage from "./page";
 import HumorPage from "./page/Humor";
 import FreePage from "./page/Free";
 import HeaderLayout from "./component/HeaderLayout";
+import HumorWrite from "./page/Humor/write";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/humor" element={<HumorPage />} />
             <Route path="/free" element={<FreePage />} />
+            <Route path="/humor/write" element={<HumorWrite />} />
           </Routes>
         </HeaderLayout>
       </Router>
