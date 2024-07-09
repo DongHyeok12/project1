@@ -1,15 +1,20 @@
 import WriteButton from "./WriteButton";
 import "../styles/styles.css";
 import { useLocation } from "react-router-dom";
+import { links } from "../constant";
 
 const SubHead = () => {
   const location = useLocation();
   const isWhere = () => {
-    if (location.pathname === "/humor") return "유머";
-    else if (location.pathname === "/free") return "자유";
+    for (let i = 0; i < links.length; i++) {
+      if (links[i].path === location.pathname) {
+        return links[i].label;
+      }
+    }
   };
   return (
     <div className="SubHead">
+      {/* <button onClick={isWhere}>test</button> */}
       <a className="SubHead_a" href={`${location.pathname}`}>
         {isWhere()} 게시판
       </a>

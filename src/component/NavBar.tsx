@@ -1,15 +1,10 @@
 import React from "react";
 import "../styles/styles.css"; // 스타일 시트 임포트
 import { useLocation } from "react-router-dom";
+import { links } from "../constant";
 
 export default function NavBar() {
   const location = useLocation();
-
-  const links = [
-    { path: "/", label: "홈" },
-    { path: "/humor", label: "유머" },
-    { path: "/free", label: "자유" },
-  ];
 
   return (
     <>
