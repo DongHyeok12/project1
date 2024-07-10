@@ -16,7 +16,10 @@ const SubHead = () => {
     <div className="SubHead">
       {/* <button onClick={isWhere}>test</button> */}
       <a className="SubHead_a" href={`${location.pathname}`}>
-        {isWhere()} 게시판
+        {isWhere()}
+      </a>{" "}
+      <a className="SubHead_b" href={`${location.pathname}`}>
+        게시판
       </a>
       <WriteButton />
     </div>
