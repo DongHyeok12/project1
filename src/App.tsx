@@ -6,10 +6,11 @@ import FreePage from "./page/Free";
 import HeaderLayout from "./component/HeaderLayout";
 import HumorWrite from "./page/Humor/write";
 import FreeWrite from "./page/Free/write";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <>
+    <RecoilRoot>
       <Router>
         <HeaderLayout>
           <Routes>
@@ -21,10 +22,9 @@ function App() {
           </Routes>
         </HeaderLayout>
       </Router>
-
       {/* <Listbox /> */}
       {/* <Footer /> */}
-    </>
+    </RecoilRoot>
   );
 }
 

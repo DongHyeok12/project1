@@ -1,22 +1,16 @@
 import WriteButton from "./WriteButton";
 import "../styles/styles.css";
 import { useLocation } from "react-router-dom";
-import { links } from "../constant";
+import { useRecoilValue } from "recoil";
+import { pathLabelState } from "../state";
 
 const SubHead = () => {
   const location = useLocation();
-  const isWhere = () => {
-    for (let i = 0; i < links.length; i++) {
-      if (links[i].path === location.pathname) {
-        return links[i].label;
-      }
-    }
-  };
+  const pathLabel = useRecoilValue(pathLabelState);
   return (
     <div className="SubHead">
-      {/* <button onClick={isWhere}>test</button> */}
       <a className="SubHead_a" href={`${location.pathname}`}>
-        {isWhere()}
+        {pathLabel.label}
       </a>{" "}
       <a className="SubHead_b" href={`${location.pathname}`}>
         게시판
