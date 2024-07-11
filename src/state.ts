@@ -12,3 +12,18 @@ export const pathLabelState = atom<PathLabelType>({
     label: "홈",
   },
 });
+
+export interface ContantsType {
+  num: number;
+  title: string;
+  writer: string;
+}
+
+export const contantsState = atom<ContantsType>({
+  key: "contants",
+  default: {
+    num: 1,
+    title: "testing!",
+    writer: "unknown~~",
+  },
+});

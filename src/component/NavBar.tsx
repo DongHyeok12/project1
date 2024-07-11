@@ -8,7 +8,6 @@ import { pathLabelState } from "../state";
 export default function NavBar() {
   const location = useLocation();
   const [pathLabel, setPathLabel] = useRecoilState(pathLabelState);
-  console.log(pathLabel);
   useEffect(() => {
     const a = links.find((link) => location.pathname.startsWith(link.path)) || {
       path: "/",

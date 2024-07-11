@@ -1,10 +1,11 @@
+import ListBox from "../../component/ListBox";
 import SubHeadLayout from "../../component/SubHeadLayout";
 
 const FreePage = () => {
   return (
     <>
       <SubHeadLayout>
-        <a>aa</a>
+        <ListBox />
       </SubHeadLayout>
     </>
   );
