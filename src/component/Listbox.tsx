@@ -6,28 +6,30 @@ import { contants } from "../constant";
 
 const ListBox = () => {
   const location = useLocation();
-  const [contant, setContent] = useRecoilState(contantsState);
 
   return (
     <>
       <table>
         <thead className="ListBox">
           <tr>
-            <td className="tdNum">번호</td>
-            <td className="tdTitle">제목</td>
-            <td className="tdWriter">작성자</td>
+            <th className="thNum">번호</th>
+            <th className="thTitle">제목</th>
+            <th className="thWriter">작성자</th>
           </tr>
         </thead>
         <tbody>
-          {contants.map(({ num, title, writer }) => (
-            <tr>
-              <td>{num}</td>
-              <td>
-                <a href={`${location.pathname}/${num}`}>{title}</a>
-              </td>
-              <td>{writer}</td>
-            </tr>
-          ))}
+          {contants
+            .reverse()
+            .slice(0, 20)
+            .map(({ num, title, writer }) => (
+              <tr>
+                <td className="thNum">{num}</td>
+                <td className="thTitle">
+                  <a href={`${location.pathname}/${num}`}>{title}</a>
+                </td>
+                <td className="thWriter">{writer}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </>
