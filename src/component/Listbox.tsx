@@ -1,9 +1,29 @@
 import { useLocation } from "react-router-dom";
 import "../styles/styles.css";
-import { contants } from "../constant";
+
+import { useEffect, useState } from "react";
+import { getTmpContents } from "../constant";
+
+export interface ContentsType {
+  num: number;
+  title: string;
+  writer: string;
+}
 
 const ListBox = () => {
   const location = useLocation();
+
+  const [page, setPage] = useState<number>(1);
+  const [contentsList, setContentsList] = useState<ContentsType[]>([]);
+
+  const getContentsApi = async () => {
+    const result = await getTmpContents(page);
+    setContentsList(result);
+  };
+
+  useEffect(() => {
+    getContentsApi();
+  }, [page]);
 
   return (
     <>
@@ -16,20 +36,20 @@ const ListBox = () => {
           </tr>
         </thead>
         <tbody>
-          {contants
-            .reverse()
-            .slice(0, 20)
-            .map(({ num, title, writer }) => (
-              <tr>
-                <td className="thNum">{num}</td>
-                <td className="thTitle">
-                  <a href={`${location.pathname}/${num}`}>{title}</a>
-                </td>
-                <td className="thWriter">{writer}</td>
-              </tr>
-            ))}
+          {contentsList.reverse().map((v) => (
+            <tr key={v.num}>
+              <td className="thNum">{v.num}</td>
+              <td className="thTitle">
+                <a href={`${location.pathname}/${v.num}`}>{v.title}</a>
+              </td>
+              <td className="thWriter">{v.writer}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <button onClick={() => setPage(1)}>1</button>
+      <button onClick={() => setPage(2)}>2</button>
+      <button onClick={() => setPage(3)}>3</button>
     </>
   );
 };

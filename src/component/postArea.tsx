@@ -1,8 +1,23 @@
-import { Form } from "react-router-dom";
 import "../styles/styles.css";
-import { Button, Input, Select, Upload } from "antd";
+import {
+  Button,
+  Cascader,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Row,
+  Select,
+  Switch,
+  TreeSelect,
+  Upload,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { UploadOutlined } from "@ant-design/icons";
+import { SizeType } from "antd/es/config-provider/SizeContext";
+import { useState } from "react";
 
 export default function PostArea() {
   const { Option } = Select;
@@ -21,16 +36,30 @@ export default function PostArea() {
   };
 
   return (
-    <Form name="validate_other" {...formItemLayout} style={{ maxWidth: 600 }}>
-      <Input.Group>
+    <Form>
+      <Row gutter={16}>
+        <Col span={4}>
+          <Form.Item label="아이디">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col span={4}>
+          <Form.Item label="비밀번호">
+            <Input />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Form.Item label="제목">
         <Input />
-        <Input />
-        <Input />
-      </Input.Group>
-      <TextArea />
-      <Upload name="logo" action="/upload.do" listType="picture">
-        <Button icon={<UploadOutlined />}>Click to upload</Button>
-      </Upload>
+      </Form.Item>
+
+      <Row gutter={16}>
+        <Col span={4}>
+          <Form.Item>
+            <Button>저장하기</Button>
+          </Form.Item>
+        </Col>
+      </Row>
     </Form>
   );
 }

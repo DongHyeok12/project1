@@ -1,4 +1,4 @@
-import ListBox from "../../component/ListBox";
+import ListBox from "../../component/Listbox";
 import SubHeadLayout from "../../component/SubHeadLayout";
 
 const FreePage = () => {
