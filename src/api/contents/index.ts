@@ -1,6 +1,5 @@
 import { getTmpContents } from "../../constant";
 import { isSuccessResponse } from "../../type/api";
-import { getContentsResponse } from "../../type/api/contents";
 
 /**
  *

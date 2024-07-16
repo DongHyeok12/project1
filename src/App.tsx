@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./page";
-import HumorPage from "./page/humor";
-import FreePage from "./page/free";
+import HumorPage from "./page/Humor";
+import FreePage from "./page/Free";
 import HeaderLayout from "./component/HeaderLayout";
-import HumorWrite from "./page/humor/write";
-import FreeWrite from "./page/free/write";
+import HumorWrite from "./page/Humor/write";
+import FreeWrite from "./page/Free/write";
 import { RecoilRoot } from "recoil";
 
 function App() {

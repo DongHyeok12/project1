@@ -22,20 +22,20 @@ export default function NavBar() {
           <img className="Logo" src="/img/logo.jpg" alt="꿀벌" />
         </a>
         <a
-          className={`NavBar${location.pathname === "/" ? " selected" : ""}`}
+          className={`NavBar${pathLabel.path === "/" ? " selected" : ""}`}
           href="/"
         >
           홈
         </a>
-        {links.map(({ path, label }) => (
+        {links.map((pathLabel) => (
           <a
-            key={path}
+            key={pathLabel.path}
             className={`NavBar${
-              location.pathname.startsWith(path) ? " selected" : ""
+              location.pathname.startsWith(pathLabel.path) ? " selected" : ""
             }`}
-            href={path}
+            href={pathLabel.path}
           >
-            {label}
+            {pathLabel.label}
           </a>
         ))}
       </div>

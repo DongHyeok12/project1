@@ -55,6 +55,7 @@ const ListBox = () => {
       <button onClick={() => setPage(1)}>1</button>
       <button onClick={() => setPage(2)}>2</button>
       <button onClick={() => setPage(3)}>3</button>
+      <button onClick={() => setPage(101)}>101</button>
     </>
   );
 };
