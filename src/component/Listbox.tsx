@@ -1,7 +1,5 @@
 import { useLocation } from "react-router-dom";
 import "../styles/styles.css";
-import { useRecoilState } from "recoil";
-import { contantsState } from "../state";
 import { contants } from "../constant";
 
 const ListBox = () => {

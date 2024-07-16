@@ -179,3 +179,15 @@ td:last-child {
   width: 20vw;
   text-align: center;
 }
+
+/* postarea.css */
+
+textarea {
+  resize: none;
+  white-space: pre-wrap;
+}
+
+.postArea {
+  align-self: center;
+  width: 90vw;
+}
