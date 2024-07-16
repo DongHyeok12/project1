@@ -2,13 +2,8 @@ import { useLocation } from "react-router-dom";
 import "../styles/styles.css";
 
 import { useEffect, useState } from "react";
-import { getTmpContents } from "../constant";
-
-export interface ContentsType {
-  num: number;
-  title: string;
-  writer: string;
-}
+import { ContentsType } from "../type/contents";
+import { getContents } from "../api/contents";
 
 const ListBox = () => {
   const location = useLocation();
@@ -16,13 +11,23 @@ const ListBox = () => {
   const [page, setPage] = useState<number>(1);
   const [contentsList, setContentsList] = useState<ContentsType[]>([]);
 
+  // 컨텐츠를 불러오는 API 호출
   const getContentsApi = async () => {
-    const result = await getTmpContents(page);
-    setContentsList(result);
+    try {
+      // API 호출
+      const result = await getContents(page);
+
+      // 컨텐츠 저장
+      setContentsList(result.contents);
+    } catch (error) {
+      // 실패 했을 경우, error 메시지 표시
+      console.error(error);
+      alert(error);
+    }
   };
 
   useEffect(() => {
-    getContentsApi();
+    getContentsApi(); // 초기 or 페이지 변경 시, API 호출
   }, [page]);
 
   return (
