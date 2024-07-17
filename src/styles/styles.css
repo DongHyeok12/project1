@@ -130,7 +130,7 @@ a:active {
 .SubHead_b:hover {
   color: #212121;
 }
-/* HeaderLayout 스타일 */
+/* SubHeadLayout 스타일 */
 .SubHeadLayout {
   display: flex;
   flex-direction: column;
@@ -182,12 +182,39 @@ td:last-child {
 
 /* postarea.css */
 
-textarea {
-  resize: none;
-  white-space: pre-wrap;
+.PostArea {
+  align-self: center;
+  width: 100vw;
+  padding: 20px;
 }
 
-.postArea {
-  align-self: center;
+.underline {
+  border-bottom: 5px solid gold;
+  padding: 20px;
+}
+
+textarea {
+  resize: none;
   width: 90vw;
+  height: 50vh;
+  border-radius: 6px;
+  border: 1px solid #d9d9d9;
+  list-style: solid;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 11px;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  line-height: 1.5714285714285714;
+  list-style: none;
+
+  display: flex;
+}
+textarea:hover {
+  border-color: gold;
+  background-color: white;
+}
+
+textarea:active {
+  box-shadow: 0 0 0 2px gold;
 }

@@ -1,9 +1,8 @@
-import PostArea from "../../../component/postArea";
+import PostArea from "../../../component/PostArea";
 
 const FreeWrite = () => {
   return (
     <>
-      <h1>FreeWrite</h1>
       <PostArea />
     </>
   );
