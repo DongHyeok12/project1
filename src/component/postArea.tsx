@@ -2,10 +2,17 @@ import { useRecoilValue } from "recoil";
 import "../styles/styles.css";
 import { Button, Col, Form, Input, Row } from "antd";
 import { pathLabelState } from "../state";
-import TextArea from "antd/es/input/TextArea";
+
+const { TextArea } = Input;
+const onChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+  console.log("Change:", e.target.value);
+};
 
 export default function PostArea() {
   const pathLabel = useRecoilValue(pathLabelState);
+
   return (
     <>
       <div className="underline">
@@ -32,18 +39,23 @@ export default function PostArea() {
           </Row>
           <Col span={16}>
             <Form.Item label="제&nbsp;&nbsp;&nbsp;&nbsp;목">
-              <Input id="Title" />
+              <Input id="Title" showCount maxLength={25} />
             </Form.Item>
           </Col>
-
           <Row gutter={16}>
             <Col span={4}>
               <Form.Item>
-                <textarea />
+                <TextArea
+                  showCount
+                  maxLength={100}
+                  onChange={onChange}
+                  placeholder="disable resize"
+                  style={{ height: 120, width: 500, resize: "none" }}
+                />
+                {/* <textarea /> */}
               </Form.Item>
             </Col>
           </Row>
-
           <Row gutter={16}>
             <Col span={4}>
               <Form.Item>

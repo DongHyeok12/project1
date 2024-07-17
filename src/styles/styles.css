@@ -183,19 +183,19 @@ td:last-child {
 /* postarea.css */
 
 .PostArea {
-  align-self: center;
-  width: 100vw;
   padding: 20px;
+  align-self: center;
 }
 
 .underline {
   border-bottom: 5px solid gold;
   padding: 20px;
+  align-self: center;
 }
 
 textarea {
   resize: none;
-  width: 90vw;
+  width: 93vw;
   height: 50vh;
   border-radius: 6px;
   border: 1px solid #d9d9d9;
@@ -207,14 +207,17 @@ textarea {
   font-size: 14px;
   line-height: 1.5714285714285714;
   list-style: none;
-
+  position: relative;
   display: flex;
+  transition-duration: 0.2s;
 }
 textarea:hover {
   border-color: gold;
   background-color: white;
 }
 
-textarea:active {
-  box-shadow: 0 0 0 2px gold;
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.116);
+  outline: none;
+  border-color: gold;
 }

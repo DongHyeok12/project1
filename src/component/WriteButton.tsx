@@ -1,4 +1,3 @@
-import { useLocation } from "react-router-dom";
 import "../styles/styles.css";
 import { useRecoilValue } from "recoil";
 import { pathLabelState } from "../state";
