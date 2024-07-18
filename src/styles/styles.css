@@ -188,36 +188,7 @@ td:last-child {
 }
 
 .underline {
-  border-bottom: 5px solid gold;
+  border-bottom: 5px solid #ffd700;
   padding: 20px;
   align-self: center;
-}
-
-textarea {
-  resize: none;
-  width: 93vw;
-  height: 50vh;
-  border-radius: 6px;
-  border: 1px solid #d9d9d9;
-  list-style: solid;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 4px 11px;
-  color: rgba(0, 0, 0, 0.88);
-  font-size: 14px;
-  line-height: 1.5714285714285714;
-  list-style: none;
-  position: relative;
-  display: flex;
-  transition-duration: 0.2s;
-}
-textarea:hover {
-  border-color: gold;
-  background-color: white;
-}
-
-textarea:focus {
-  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.116);
-  outline: none;
-  border-color: gold;
 }

@@ -29,7 +29,7 @@ export const getTmpContents = (
       // 실패 예시
       const response2: getContentsResponse = {
         resultCode: 0,
-        errorMessage: "너 page값이 말이 안돼 시발련아",
+        errorMessage: "너 page값이 말이 안돼 ",
       };
       return resolve(response2);
     }
