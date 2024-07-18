@@ -192,3 +192,7 @@ td:last-child {
   padding: 20px;
   align-self: center;
 }
+
+.IDPWInput {
+  width: 230px;
+}

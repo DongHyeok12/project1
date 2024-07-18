@@ -7,13 +7,12 @@ export const links = [
 ];
 
 export const contents = { num: 1, title: "test1", writer: "unknown1" };
-
+export const contentsArray: ContentsType[] = [];
 export const getTmpContents = (
   page: number, // 몇 페이지부터 받은 것인가
   dataPer = 10 // 몇 개의 데이터를 받은 것인가
 ): Promise<getContentsResponse> => {
   return new Promise((resolve) => {
-    const contentsArray: ContentsType[] = [];
     const start = (page - 1) * dataPer;
     const end = start + dataPer;
 

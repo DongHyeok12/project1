@@ -1,11 +1,10 @@
 import { useLocation } from "react-router-dom";
-import "../styles/styles.css";
-
+import "../../../styles/styles.css";
 import { useEffect, useState } from "react";
-import { ContentsType } from "../type/contents";
-import { getContents } from "../api/contents";
+import { ContentsType } from "../../../type/contents";
+import { getContents } from "../../../api/contents";
 
-const ListBox = () => {
+const ContentsList = () => {
   const location = useLocation();
 
   const [page, setPage] = useState<number>(1);
@@ -60,4 +59,4 @@ const ListBox = () => {
   );
 };
 
-export default ListBox;
+export default ContentsList;

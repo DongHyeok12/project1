@@ -1,6 +1,6 @@
 import React from "react";
-import SubHead from "./SubHead";
-import "../styles/styles.css"; // 스타일 시트 임포트
+import "../../../../styles/styles.css"; // 스타일 시트 임포트
+import SubHead from ".";
 
 interface SubHeadLayoutProps {
   children: React.ReactNode;

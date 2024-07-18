@@ -1,6 +1,6 @@
-import NavBar from "./NavBar";
-import UpButton from "./UpButton";
-import "../styles/styles.css"; // 스타일 시트 임포트
+import NavBar from "../navBar";
+import UpButton from "../UpButton";
+import "../../../styles/styles.css"; // 스타일 시트 임포트
 
 const Header = () => {
   return (

@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
-import "../styles/styles.css"; // 스타일 시트 임포트
+import "../../../styles/styles.css"; // 스타일 시트 임포트
 import { useLocation } from "react-router-dom";
-import { links } from "../constant";
+import { links } from "../../../constant";
 import { useRecoilState } from "recoil";
-import { pathLabelState } from "../state";
+import { pathLabelState } from "../../../recoil/atoms/PathLabelAtoms";
 
-export default function NavBar() {
+const NavBar = () => {
   const location = useLocation();
   const [pathLabel, setPathLabel] = useRecoilState(pathLabelState);
   useEffect(() => {
-    const a = links.find((link) => location.pathname.startsWith(link.path)) || {
-      path: "/",
-      label: "홈",
-    };
-    setPathLabel(a);
+    setPathLabel(
+      links.find((link) => location.pathname.startsWith(link.path)) || {
+        path: "/",
+        label: "홈",
+      }
+    );
   }, [location]);
   return (
     <>
@@ -41,4 +42,6 @@ export default function NavBar() {
       </div>
     </>
   );
-}
+};
+
+export default NavBar;

@@ -1,5 +1,5 @@
-import ListBox from "../../component/Listbox";
-import SubHeadLayout from "../../component/SubHeadLayout";
+import ListBox from "../../component/domain/contents";
+import SubHeadLayout from "../../component/common/header/sub/SubHeadLayout";
 
 const FreePage = () => {
   return (
