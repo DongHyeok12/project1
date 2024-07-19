@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import "styles/styles.css";
 import { useEffect, useState } from "react";
 import { ContentsType } from "type/contents";
 import { getContents } from "api/contents";

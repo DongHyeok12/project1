@@ -1,5 +1,3 @@
-import "styles/styles.css";
-
 const WriteButton = () => {
   return (
     <>

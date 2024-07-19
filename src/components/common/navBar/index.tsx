@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "styles/styles.css";
 import { useLocation } from "react-router-dom";
 import { links } from "constant";
 import { useRecoilState } from "recoil";

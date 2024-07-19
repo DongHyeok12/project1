@@ -1,5 +1,4 @@
 import { useRecoilValue } from "recoil";
-import "styles/styles.css";
 import { Button, Col, ConfigProvider, Form, Input, Row } from "antd";
 import theme from "styles/theme";
 import { useState } from "react";

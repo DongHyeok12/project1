@@ -6,6 +6,7 @@ import FreePage from "pages/free";
 import HeaderLayout from "components/common/header/HeaderLayout";
 import { RecoilRoot } from "recoil";
 import PostArea from "components/domain/write";
+import "styles/styles.css";
 
 function App() {
   return (
