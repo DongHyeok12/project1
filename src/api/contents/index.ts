@@ -1,5 +1,5 @@
-import { getTmpContents } from "../../constant";
-import { isSuccessResponse } from "../../type/api";
+import { getTmpContents } from "constant";
+import { isSuccessResponse } from "type/api";
 
 /**
  *

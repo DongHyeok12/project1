@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../../styles/styles.css"; // 스타일 시트 임포트
+import "styles/styles.css";
 import SubHead from ".";
 
 interface SubHeadLayoutProps {

@@ -1,5 +1,5 @@
-import SubHeadLayout from "../../component/common/header/sub/SubHeadLayout";
-import ContentsList from "../../component/domain/contents";
+import SubHeadLayout from "components/common/header/sub/SubHeadLayout";
+import ContentsList from "components/domain/contents";
 
 const HumorPage = () => {
   return (

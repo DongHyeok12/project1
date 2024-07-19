@@ -1,12 +1,16 @@
 {
+  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    // "baseUrl": "src",
-    // "paths": {
-    //   "@components/*": ["component/*"],
-    //   "@styles/*": ["styles/*"],
-    //   "@pages/*": ["page/*"],
-    //   "@constant/*": ["constant/*"]
-    // },
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@styles/*": ["styles/*"],
+      "@pages/*": ["pages/*"],
+      "@constant/*": ["constant/*"],
+      "@recoil/*": ["recoil/*"],
+      "@type/*": ["type/*"],
+      "@api/*": ["api/*"]
+    },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

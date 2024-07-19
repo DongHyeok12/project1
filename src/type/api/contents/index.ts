@@ -1,5 +1,5 @@
 import { APIResponse } from "..";
-import { ContentsType } from "../../contents";
+import { ContentsType } from "type/contents";
 
 export type getContentsResponse = APIResponse<{
   contents: ContentsType[];

@@ -1,6 +1,6 @@
-import { pathLabelState } from "../../../../recoil/atoms/PathLabelAtoms";
-import WriteButton from "../../../domain/write/WriteButton";
-import "../../../../styles/styles.css";
+import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
+import WriteButton from "components/domain/write/WriteButton";
+import "styles/styles.css";
 import { useRecoilValue } from "recoil";
 
 const SubHead = () => {

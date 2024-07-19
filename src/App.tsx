@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./page";
-import HumorPage from "./page/humor";
-import FreePage from "./page/free";
-import HeaderLayout from "./component/common/header/HeaderLayout";
+import HomePage from "pages";
+import HumorPage from "pages/humor";
+import FreePage from "pages/free";
+import HeaderLayout from "components/common/header/HeaderLayout";
 import { RecoilRoot } from "recoil";
-import PostArea from "./component/domain/write";
+import PostArea from "components/domain/write";
 
 function App() {
   return (

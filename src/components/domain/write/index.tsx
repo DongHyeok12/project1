@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
-import "../../../styles/styles.css";
+import "styles/styles.css";
 import { Button, Col, ConfigProvider, Form, Input, Row } from "antd";
-import theme from "../../../styles/theme";
+import theme from "styles/theme";
 import { useState } from "react";
-import { contentsArray } from "../../../constant";
-import { pathLabelState } from "../../../recoil/atoms/PathLabelAtoms";
+import { contentsArray } from "constant";
+import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
 
 const WriteArea = () => {
   const pathLabel = useRecoilValue(pathLabelState);

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import "../../../styles/styles.css"; // 스타일 시트 임포트
+import "styles/styles.css";
 import { useLocation } from "react-router-dom";
-import { links } from "../../../constant";
+import { links } from "constant";
 import { useRecoilState } from "recoil";
-import { pathLabelState } from "../../../recoil/atoms/PathLabelAtoms";
+import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
 
 const NavBar = () => {
   const location = useLocation();

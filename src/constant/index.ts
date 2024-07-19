@@ -1,5 +1,5 @@
-import { getContentsResponse } from "../type/api/contents";
-import { ContentsType } from "../type/contents";
+import { getContentsResponse } from "@type/api/contents";
+import { ContentsType } from "@type/contents";
 
 export const links = [
   { path: "/humor", label: "유머" },
