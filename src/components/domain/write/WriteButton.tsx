@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 const WriteButton = () => {
   return (
     <>
-      <a href={`contents/write`}>
+      <Link to={`/contents/write`}>
         <button className="WriteButton">글쓰기</button>
-      </a>
+      </Link>
     </>
   );
 };

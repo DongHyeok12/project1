@@ -1,17 +1,18 @@
 import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
 import WriteButton from "components/domain/write/WriteButton";
 import { useRecoilValue } from "recoil";
+import { Link } from "react-router-dom";
 
 const SubHead = () => {
   const pathLabel = useRecoilValue(pathLabelState);
   return (
     <div className="SubHead">
-      <a className="SubHead_a" href={`${pathLabel.path}`}>
+      <Link className="SubHead_a" to={`${pathLabel.path}`}>
         {pathLabel.label}
-      </a>{" "}
-      <a className="SubHead_b" href={`${pathLabel.path}`}>
+      </Link>{" "}
+      <Link className="SubHead_b" to={`${pathLabel.path}`}>
         게시판
-      </a>
+      </Link>
       <WriteButton />
     </div>
   );

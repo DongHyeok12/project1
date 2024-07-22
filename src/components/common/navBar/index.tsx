@@ -3,16 +3,13 @@ import { useLocation } from "react-router-dom";
 import { links } from "constant";
 import { useRecoilState } from "recoil";
 import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
-import { ExpathState } from "recoil/atoms/ExpathAtoms";
 
 const NavBar = () => {
   const location = useLocation();
   const [pathLabel, setPathLabel] = useRecoilState(pathLabelState);
-  const [exPath, setExPath] = useRecoilState(ExpathState);
 
   useEffect(() => {
     if (location.pathname === "/contents/write") {
-      setPathLabel(exPath);
     } else {
       setPathLabel(
         links.find((link) => location.pathname.startsWith(link.path)) || {
@@ -20,10 +17,8 @@ const NavBar = () => {
           label: "홈",
         }
       );
-      setExPath(pathLabel);
     }
-  }, [location]);
-  console.log(exPath.path + "sss" + pathLabel.path);
+  }, []);
 
   return (
     <>
