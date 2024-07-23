@@ -1,17 +1,23 @@
-import { useRecoilValue } from "recoil";
 import { Button, Col, ConfigProvider, Form, Input, Row } from "antd";
 import theme from "styles/theme";
 import { useState } from "react";
-import { contentsArray } from "constant";
-import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
+import { contentsArray, links } from "constant";
+import { useParams } from "react-router-dom";
+import PictureUpload from "components/common/PictureUpload";
 
 const WriteArea = () => {
-  const pathLabel = useRecoilValue(pathLabelState);
+  const { pageId } = useParams();
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
   const [textArea, setTextArea] = useState("");
   const { TextArea } = Input;
+  // console.log("/" + pageId === pathLabel.path);
+  const nowPage = links.find((link) => link.path === "/" + pageId) || {
+    path: "",
+    label: "알 수 없는",
+  };
+
   const IDonChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -40,10 +46,10 @@ const WriteArea = () => {
   return (
     <ConfigProvider theme={theme}>
       <div className="underline">
-        <a className="SubHead_a" href={`${pathLabel.path}`}>
-          {pathLabel.label}
+        <a className="SubHead_a" href={`${nowPage.path}`}>
+          {nowPage.label}
         </a>{" "}
-        <a className="SubHead_b" href={`${pathLabel.path}`}>
+        <a className="SubHead_b" href={`${nowPage.path}`}>
           게시판
         </a>
       </div>
@@ -118,6 +124,9 @@ const WriteArea = () => {
               />
             </Form.Item>
           </Col>
+          <Form.Item>
+            <PictureUpload />
+          </Form.Item>
           <Col span={30}>
             <Form.Item>
               {/* 예외처리 비번 스페이스바 */}
@@ -127,7 +136,7 @@ const WriteArea = () => {
                 onClick={() => {
                   contentsArray.push({ num: 100, title: title, writer: id });
                   console.log(
-                    `id : ${id}\npw : ${pw}\ntitle : ${title}\ntextArea : ${textArea}`
+                    `id : ${id}\npw : ${pw}\ntitle : ${title}\ntextArea : ${textArea}\npage : ${pageId}`
                   );
                 }}
               >

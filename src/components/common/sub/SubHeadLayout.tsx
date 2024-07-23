@@ -1,6 +1,5 @@
 import React from "react";
 import SubHead from ".";
-
 interface SubHeadLayoutProps {
   children: React.ReactNode;
 }

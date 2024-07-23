@@ -1,24 +1,27 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { links } from "constant";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
 
-const NavBar = () => {
-  const location = useLocation();
-  const [pathLabel, setPathLabel] = useRecoilState(pathLabelState);
+interface navBarProps {
+  path: string;
+}
+
+const NavBar = (props: navBarProps) => {
+  const setPathLabel = useSetRecoilState(pathLabelState);
 
   useEffect(() => {
-    if (location.pathname === "/contents/write") {
+    if (props.path.startsWith("/contents/write")) {
     } else {
       setPathLabel(
-        links.find((link) => location.pathname.startsWith(link.path)) || {
+        links.find((link) => props.path.startsWith(link.path)) || {
           path: "/",
           label: "홈",
         }
       );
     }
-  }, []);
+  }, [props]);
+  console.log(props.path);
 
   return (
     <>
@@ -27,7 +30,7 @@ const NavBar = () => {
           <img className="Logo" src="/img/logo.jpg" alt="꿀벌" />
         </a>
         <a
-          className={`NavBar${pathLabel.path === "/" ? " selected" : ""}`}
+          className={`NavBar${props.path === "/" ? " selected" : ""}`}
           href="/"
         >
           홈
@@ -36,8 +39,8 @@ const NavBar = () => {
           <a
             key={pathLabel.path}
             className={`NavBar${
-              location.pathname.startsWith(pathLabel.path) ||
-              location.pathname.endsWith(pathLabel.path)
+              props.path.startsWith(pathLabel.path) ||
+              props.path.endsWith(pathLabel.path)
                 ? " selected"
                 : ""
             }`}
