@@ -5,8 +5,8 @@ import HumorPage from "pages/humor";
 import FreePage from "pages/free";
 import HeaderLayout from "components/common/header/HeaderLayout";
 import { RecoilRoot } from "recoil";
-import PostArea from "components/domain/write";
 import "styles/styles.css";
+import WriteArea from "components/domain/write";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/humor" element={<HumorPage />} />
             <Route path="/free" element={<FreePage />} />
-            <Route path="/contents/write" element={<PostArea />} />
+            <Route path="/contents/write/:pageId" element={<WriteArea />} />
           </Routes>
         </HeaderLayout>
       </Router>

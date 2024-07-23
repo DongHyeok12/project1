@@ -1,5 +1,5 @@
 import ContentsList from "components/domain/contents";
-import SubHeadLayout from "components/common/header/sub/SubHeadLayout";
+import SubHeadLayout from "components/common/sub/SubHeadLayout";
 
 const FreePage = () => {
   return (

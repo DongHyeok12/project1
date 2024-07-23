@@ -1,4 +1,4 @@
-import SubHeadLayout from "components/common/header/sub/SubHeadLayout";
+import SubHeadLayout from "components/common/sub/SubHeadLayout";
 import ContentsList from "components/domain/contents";
 
 const HumorPage = () => {

@@ -36,7 +36,10 @@ const NavBar = () => {
           <a
             key={pathLabel.path}
             className={`NavBar${
-              location.pathname.startsWith(pathLabel.path) ? " selected" : ""
+              location.pathname.startsWith(pathLabel.path) ||
+              location.pathname.endsWith(pathLabel.path)
+                ? " selected"
+                : ""
             }`}
             href={pathLabel.path}
           >
