@@ -1,5 +1,5 @@
 import { getContentsResponse } from "type/api/contents";
-import { ContentsType } from "type/contents";
+import { ContentsListType } from "type/contents";
 
 export const links = [
   { path: "/humor", label: "유머" },
@@ -7,7 +7,7 @@ export const links = [
 ];
 
 export const contents = { num: 1, title: "test1", writer: "unknown1" };
-export const contentsArray: ContentsType[] = [];
+export const contentsArray: ContentsListType[] = [];
 export const getTmpContents = (
   page: number, // 몇 페이지부터 받은 것인가
   dataPer = 10 // 몇 개의 데이터를 받은 것인가

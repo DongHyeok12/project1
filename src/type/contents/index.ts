@@ -1,4 +1,4 @@
-export interface ContentsType {
+export interface ContentsListType {
   num: number;
   title: string;
   writer: string;

@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "num": 1,
+      "title": "test",
+      "writer": "철수"
+    },
+    {
+      "num": 2,
+      "title": "test",
+      "writer": "철수"
+    },
+    {
+      "num": 3,
+      "title": "test",
+      "writer": "철수"
+    },
+    {
+      "num": 4,
+      "title": "test",
+      "writer": "철수"
+    },
+    {
+      "num": 5,
+      "title": "test",
+      "writer": "철수"
+    },
+    {
+      "num": 6,
+      "title": "test",
+      "writer": "철수"
+    }
+  ]
+}

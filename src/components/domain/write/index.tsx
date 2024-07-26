@@ -2,8 +2,11 @@ import { Button, Col, ConfigProvider, Form, Input, Row } from "antd";
 import theme from "styles/theme";
 import { useState } from "react";
 import { contentsArray, links } from "constant";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PictureUpload from "components/common/PictureUpload";
+import { ContentsListType } from "type/contents";
+import { useRecoilValue } from "recoil";
+import { contentsLengthState } from "recoil/atoms/ContentsLengthAtom";
 
 const WriteArea = () => {
   const { pageId } = useParams();
@@ -17,6 +20,7 @@ const WriteArea = () => {
     path: "",
     label: "알 수 없는",
   };
+  const contentsLength = useRecoilValue(contentsLengthState);
 
   const IDonChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -43,15 +47,33 @@ const WriteArea = () => {
     setTextArea(e.target.value);
   };
 
+  function postData(data: ContentsListType) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:3000/posts");
+    xhr.setRequestHeader("content-type", "application/json; charset=UTF-8");
+    //db.json 파일의 posts 객체에 있는 key가 id인 값은 유일한 값이라서 안넣어줘도 자동으로 생성됨.
+
+    xhr.send(JSON.stringify(data));
+
+    xhr.onload = () => {
+      if (xhr.status === 201) {
+        const res = JSON.parse(xhr.response);
+        console.log(res);
+      } else {
+        console.log(xhr.status, xhr.statusText);
+      }
+    };
+  }
+
   return (
     <ConfigProvider theme={theme}>
       <div className="underline">
-        <a className="SubHead_a" href={`${nowPage.path}`}>
+        <Link className="SubHead_a" to={`${nowPage.path}`}>
           {nowPage.label}
-        </a>{" "}
-        <a className="SubHead_b" href={`${nowPage.path}`}>
+        </Link>{" "}
+        <Link className="SubHead_b" to={`${nowPage.path}`}>
           게시판
-        </a>
+        </Link>
       </div>
       <div className="PostArea">
         <Form>
@@ -134,13 +156,18 @@ const WriteArea = () => {
                 id="Save"
                 style={{ float: "right" }}
                 onClick={() => {
-                  contentsArray.push({ num: 100, title: title, writer: id });
                   console.log(
                     `id : ${id}\npw : ${pw}\ntitle : ${title}\ntextArea : ${textArea}\npage : ${pageId}`
                   );
+                  console.log(contentsArray);
+                  postData({
+                    num: contentsLength + 1,
+                    title: title,
+                    writer: id,
+                  });
                 }}
               >
-                저장하기
+                <Link to={nowPage.path}>저장하기</Link>
               </Button>
             </Form.Item>
           </Col>

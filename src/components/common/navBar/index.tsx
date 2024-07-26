@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { links } from "constant";
 import { useSetRecoilState } from "recoil";
 import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
+import { Link } from "react-router-dom";
 
 interface navBarProps {
   path: string;
@@ -26,17 +27,17 @@ const NavBar = (props: navBarProps) => {
   return (
     <>
       <div>
-        <a href="/">
+        <Link to="/">
           <img className="Logo" src="/img/logo.jpg" alt="꿀벌" />
-        </a>
-        <a
+        </Link>
+        <Link
           className={`NavBar${props.path === "/" ? " selected" : ""}`}
-          href="/"
+          to="/"
         >
           홈
-        </a>
+        </Link>
         {links.map((pathLabel) => (
-          <a
+          <Link
             key={pathLabel.path}
             className={`NavBar${
               props.path.startsWith(pathLabel.path) ||
@@ -44,10 +45,10 @@ const NavBar = (props: navBarProps) => {
                 ? " selected"
                 : ""
             }`}
-            href={pathLabel.path}
+            to={pathLabel.path}
           >
             {pathLabel.label}
-          </a>
+          </Link>
         ))}
       </div>
     </>
