@@ -16,13 +16,13 @@ export const getTmpContents = (
     const start = (page - 1) * dataPer;
     const end = start + dataPer;
 
-    for (let i = start + 1; i < end; i++) {
-      contentsArray.push({
-        num: i,
-        title: `test${i}`,
-        writer: `unknown${i}`,
-      });
-    }
+    // for (let i = start + 1; i < end; i++) {
+    //   contentsArray.push({
+    //     num: i,
+    //     title: `test${i}`,
+    //     writer: `unknown${i}`,
+    //   });
+    // }
 
     if (page > 100) {
       // 실패 예시

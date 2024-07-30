@@ -5,7 +5,7 @@ const FreePage = () => {
   return (
     <>
       <SubHeadLayout>
-        <ContentsList />
+        <ContentsList where="/free" />
       </SubHeadLayout>
     </>
   );

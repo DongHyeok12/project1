@@ -1,34 +1,204 @@
 {
   "posts": [
     {
-      "num": 1,
-      "title": "test",
-      "writer": "철수"
+      "id": 1,
+      "title": "Hello World"
+    }
+  ],
+  "humor": [
+    {
+      "num": 11,
+      "title": "타입스크립트 입문",
+      "writer": "김철수",
+      "pw": "pw1234",
+      "textArea": "타입스크립트의 기본 문법과 타입에 대한 입문서입니다.",
+      "id": "dcd8"
     },
     {
       "num": 2,
-      "title": "test",
-      "writer": "철수"
+      "title": "자바스크립트 고급 패턴",
+      "writer": "이영희",
+      "pw": "pw5678",
+      "textArea": "클로저, IIFE 등 자바스크립트의 고급 패턴을 탐구합니다.",
+      "id": "4599"
     },
     {
       "num": 3,
-      "title": "test",
-      "writer": "철수"
+      "title": "비동기 프로그래밍 이해하기",
+      "writer": "박민수",
+      "pw": "pw9012",
+      "textArea": "콜백, 프로미스, async/await를 사용한 자바스크립트 비동기 프로그래밍의 심층 탐구입니다.",
+      "id": "0236"
     },
     {
       "num": 4,
-      "title": "test",
-      "writer": "철수"
+      "title": "RESTful API 구축하기",
+      "writer": "최수정",
+      "pw": "pw3456",
+      "textArea": "Node.js와 Express를 사용하여 RESTful API를 구축하는 가이드입니다.",
+      "id": "66ec"
     },
     {
       "num": 5,
-      "title": "test",
-      "writer": "철수"
+      "title": "React 훅스 심층 분석",
+      "writer": "정지훈",
+      "pw": "pw7890",
+      "textArea": "리액트 훅스의 사용법과 응용에 대한 심층 분석입니다.",
+      "id": "0e7c"
     },
     {
       "num": 6,
-      "title": "test",
-      "writer": "철수"
+      "title": "웹 보안 기초",
+      "writer": "한예슬",
+      "pw": "pw1122",
+      "textArea": "웹 보안의 기본 개념과 주요 기법을 설명합니다.",
+      "id": "136c"
+    },
+    {
+      "num": 9,
+      "title": "데이터베이스 설계와 최적화",
+      "writer": "오준호",
+      "pw": "pw3344",
+      "textArea": "효율적인 데이터베이스 설계와 최적화 기법에 대한 가이드입니다.",
+      "id": "62aa"
+    },
+    {
+      "num": 8,
+      "title": "CSS Grid와 Flexbox",
+      "writer": "김수진",
+      "pw": "pw5566",
+      "textArea": "CSS Grid와 Flexbox를 사용한 반응형 웹 디자인 기법을 다룹니다.",
+      "id": "53d4"
+    },
+    {
+      "num": 7,
+      "title": "프론트엔드 성능 최적화",
+      "writer": "이준석",
+      "pw": "pw7788",
+      "textArea": "웹 페이지 로딩 속도를 향상시키기 위한 다양한 성능 최적화 기법을 소개합니다.",
+      "id": "f0ac"
+    },
+    {
+      "num": 15,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 16,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 17,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 18,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 19,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 20,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 21,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 22,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "num": 23,
+      "title": "테스트 주도 개발",
+      "writer": "장유진",
+      "pw": "pw9900",
+      "textArea": "테스트 주도 개발(TDD)의 원칙과 실천 방법에 대해 설명합니다.",
+      "id": "817b"
+    },
+    {
+      "id": "f8db",
+      "num": 150,
+      "title": "hello world!",
+      "writer": "John",
+      "pw": "1234",
+      "textArea": "asd"
+    },
+    {
+      "id": "7ad7",
+      "num": 151,
+      "title": "sdasdadas",
+      "writer": "sdasdsda",
+      "pw": "saddsadsa",
+      "textArea": "asdsada"
+    },
+    {
+      "id": "4c41",
+      "num": 152,
+      "title": "xxxxx",
+      "writer": "zxcxz",
+      "pw": "zxcxzc",
+      "textArea": "z"
+    }
+  ],
+  "free": [
+    {
+      "num": 1,
+      "title": "free",
+      "writer": "aaaa",
+      "pw": "aaaa",
+      "textArea": "aa",
+      "id": "6427"
+    },
+    {
+      "id": "f28d",
+      "num": 12,
+      "title": "ssssfreeeee",
+      "writer": "sad",
+      "pw": "sadsa",
+      "textArea": "ss"
+    },
+    {
+      "id": "b314",
+      "num": 32,
+      "title": "ssssfreeeee",
+      "writer": "sad",
+      "pw": "sadsa",
+      "textArea": "ss"
     }
   ]
 }

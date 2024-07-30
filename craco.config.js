@@ -1,6 +1,9 @@
 const CracoAlias = require("craco-alias");
 
 module.exports = {
+  devServer: {
+    allowedHosts: "all",
+  },
   plugins: [
     {
       plugin: CracoAlias,

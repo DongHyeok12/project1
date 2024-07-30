@@ -5,7 +5,7 @@ const HumorPage = () => {
   return (
     <>
       <SubHeadLayout>
-        <ContentsList />
+        <ContentsList where="/humor" />
       </SubHeadLayout>
     </>
   );

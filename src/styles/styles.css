@@ -196,3 +196,8 @@ td:last-child {
 .IDPWInput {
   width: 230px;
 }
+
+/* Pagination.css */
+.Pagination {
+  float: right;
+}

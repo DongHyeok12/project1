@@ -1,41 +1,34 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ContentsListType } from "type/contents";
-import { getContents } from "api/contents";
-import { useRecoilState } from "recoil";
-import { contentsLengthState } from "recoil/atoms/ContentsLengthAtom";
-import { reverse } from "dns";
+import axios from "axios";
+import { Pagination } from "antd";
+interface whereType {
+  where: string;
+}
 
-const ContentsList = () => {
-  const [contentsLength, setContentsLength] =
-    useRecoilState(contentsLengthState);
-  function getPostData() {
-    const xhr = new XMLHttpRequest(); // XMLHttpRequest 객체 생성
-
-    xhr.open("GET", "http://localhost:3000/posts");
-    xhr.setRequestHeader("content-type", "application/json");
-    xhr.send();
-
-    // 서버로 부터 응답 받으면 실행
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const res = JSON.parse(xhr.response);
-        setContentsList(res);
-        setContentsLength(res.length);
-      } else {
-        console.log(xhr.status, xhr.statusText);
-      }
-    };
-  }
-
-  const location = useLocation();
-
+const ContentsList = (props: whereType) => {
   const [page, setPage] = useState<number>(1);
   const [contentsList, setContentsList] = useState<ContentsListType[]>([]);
+  const [totalItems, setTotalItems] = useState<number>(0);
 
+  function sortData(data: ContentsListType[]) {
+    data.sort(function (a: ContentsListType, b: ContentsListType) {
+      return b.num - a.num;
+    });
+  }
   useEffect(() => {
-    getPostData();
-  }, [page]);
+    axios
+      .get("http://localhost:3000" + props.where)
+      .then((res) => {
+        sortData(res.data);
+        setTotalItems(res.data.length);
+        setContentsList(res.data.slice((page - 1) * 15, page * 15));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [page, props.where]);
 
   // 컨텐츠를 불러오는 API 호출
   // const getContentsApi = async () => {
@@ -67,25 +60,26 @@ const ContentsList = () => {
           </tr>
         </thead>
         <tbody>
-          {contentsList
-            .sort(function (a, b) {
-              return b.num - a.num;
-            })
-            .map((v) => (
-              <tr key={v.num}>
-                <td className="thNum">{v.num}</td>
-                <td className="thTitle">
-                  <Link to={`${location.pathname}/${v.num}`}>{v.title}</Link>
-                </td>
-                <td className="thWriter">{v.writer}</td>
-              </tr>
-            ))}
+          {contentsList.map((v) => (
+            <tr key={v.num}>
+              <td className="thNum">{v.num}</td>
+              <td className="thTitle">
+                <Link to={`${props.where}/${v.num}`}>{v.title}</Link>
+              </td>
+              <td className="thWriter">{v.writer}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
-      <button onClick={() => setPage(1)}>1</button>
-      <button onClick={() => setPage(2)}>2</button>
-      <button onClick={() => setPage(3)}>3</button>
-      <button onClick={() => setPage(101)}>101</button>
+      <Pagination
+        className="Pagination"
+        defaultCurrent={1}
+        total={totalItems}
+        pageSize={15}
+        onChange={(v) => {
+          setPage(v);
+        }}
+      />
     </>
   );
 };
