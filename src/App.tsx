@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "pages";
-import HumorPage from "pages/humor";
-import FreePage from "pages/free";
+import ListPage from "pages/list";
 import HeaderLayout from "components/common/header/HeaderLayout";
 import { RecoilRoot } from "recoil";
 import "styles/styles.css";
@@ -19,15 +18,10 @@ function App() {
           <HeaderLayout>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/humor" element={<HumorPage />} />
-              <Route path="/free" element={<FreePage />} />
+              <Route path="/:pageId" element={<ListPage />} />
               <Route path="/contents/write/:pageId" element={<WriteArea />} />
               <Route
-                path="/humor/:contentsNumber"
-                element={<DetailContents />}
-              />
-              <Route
-                path="/free/:contentsNumber"
+                path="/:pageId/:contentsNumber"
                 element={<DetailContents />}
               />
             </Routes>

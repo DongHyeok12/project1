@@ -1,25 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ContentsListType } from "type/contents";
 import axios from "axios";
 import { Pagination } from "antd";
-interface whereType {
-  where: string;
+interface pageIdType {
+  pageId: string;
 }
-
-const ContentsList = (props: whereType) => {
-  const [page, setPage] = useState<number>(1);
+const ContentsList = (props: pageIdType) => {
   const [contentsList, setContentsList] = useState<ContentsListType[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
-
+  const { pageId } = props;
+  const [pageNum, setPageNum] = useSearchParams({ page: "1" });
+  const page = Number(pageNum.get("page"));
+  console.log(page);
   function sortData(data: ContentsListType[]) {
     data.sort(function (a: ContentsListType, b: ContentsListType) {
-      return b.num - a.num;
+      return Number(b.id) - Number(a.id);
     });
   }
   useEffect(() => {
+    if (page === 0) {
+      setPageNum({ page: "1" });
+    }
     axios
-      .get("http://localhost:3000" + props.where)
+      .get("http://localhost:3000/" + pageId)
       .then((res) => {
         sortData(res.data);
         setTotalItems(res.data.length);
@@ -28,7 +32,7 @@ const ContentsList = (props: whereType) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [page, props.where]);
+  }, [pageId, pageNum]);
 
   // 컨텐츠를 불러오는 API 호출
   // const getContentsApi = async () => {
@@ -61,23 +65,25 @@ const ContentsList = (props: whereType) => {
         </thead>
         <tbody>
           {contentsList.map((v) => (
-            <tr key={v.num}>
-              <td className="thNum">{v.num}</td>
+            <tr key={v.id}>
+              <td className="thNum">{v.id}</td>
               <td className="thTitle">
-                <Link to={`${props.where}/${v.num}`}>{v.title}</Link>
+                <Link to={`/${pageId}/${v.id}`}>{v.title}</Link>{" "}
+                <span className="time">{v.time}</span>
               </td>
               <td className="thWriter">{v.writer}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      {console.log(page)}
       <Pagination
-        className="Pagination"
-        defaultCurrent={1}
+        style={{ float: "right" }}
+        current={page}
         total={totalItems}
         pageSize={15}
         onChange={(v) => {
-          setPage(v);
+          setPageNum({ page: String(v) });
         }}
       />
     </>

@@ -197,7 +197,35 @@ td:last-child {
   width: 230px;
 }
 
-/* Pagination.css */
-.Pagination {
+/* contentsDetail.css */
+.contentsDetail {
+  padding: 20px;
+  align-self: center;
+  width: inherit;
+  height: 100vh;
+  font-size: 18px;
+}
+
+.time {
+  font-size: 10px;
+  color: gray;
+}
+
+.delBt {
   float: right;
+  font-size: 12px;
+  width: 90px;
+  height: 20px;
+}
+
+.writerLine {
+  padding-bottom: 10px;
+  font-size: 14px;
+  border-bottom: 2px solid gainsboro;
+}
+
+.contentText {
+  font-size: 16px;
+  margin-top: 20px;
+  white-space: pre-wrap;
 }

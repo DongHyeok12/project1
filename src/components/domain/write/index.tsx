@@ -5,7 +5,39 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import PictureUpload from "components/common/PictureUpload";
 import { ContentsListType } from "type/contents";
 import axios from "axios";
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+const modules = {
+  toolbar: {
+    container: [
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      ["image", "video"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ color: [] }, { background: [] }],
+      [{ align: [] }],
+    ],
+  },
+};
+const formats = [
+  "header",
+  "font",
+  "size",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "align",
+  "list",
+  "bullet",
+  "indent",
+  "background",
+  "color",
+  "image",
+  "video",
+  "width",
+  "font-color",
+];
 const WriteArea = () => {
   const { pageId } = useParams();
   const [contentNum, setContentNum] = useState(0);
@@ -13,9 +45,14 @@ const WriteArea = () => {
   const [pw, setPw] = useState("");
   const [title, setTitle] = useState("");
   const [textArea, setTextArea] = useState("");
-  const { TextArea } = Input;
   const nav = useNavigate();
-
+  const date2String = (date: Date) =>
+    `${String(date.getFullYear())}.${String(date.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}.${String(date.getDate()).padStart(2, "0")} ${String(
+      date.getHours()
+    ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
     label: "알 수 없는",
@@ -23,33 +60,22 @@ const WriteArea = () => {
   const IDonChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(e.target.id, "Change:", e.target.value);
     setId(e.target.value);
   };
   const PWonChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(e.target.id, "Change:", e.target.value);
     setPw(e.target.value);
   };
   const TitleonChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    console.log(e.target.id, "Change:", e.target.value);
     setTitle(e.target.value);
-  };
-  const TextAreaonChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    console.log(e.target.id, "Change:", e.target.value);
-    setTextArea(e.target.value);
   };
   const postData = (data: ContentsListType, value: string) => {
     axios
       .post("http://localhost:3000" + value, data)
-      .then((res) => {
-        console.log(res);
-      })
+      .then(() => {})
       .catch((err) => {
         console.log(err);
       });
@@ -68,25 +94,23 @@ const WriteArea = () => {
       return false;
     }
   };
+
   const [isDisable, setIsDisable] = useState(false);
   const handleSave = () => {
-    console.log(
-      `id : ${id}\npw : ${pw}\ntitle : ${title}\ntextArea : ${textArea}\npage : ${pageId}`
-    );
-
     if (isCheckUpload()) {
       setIsDisable(true);
+
       postData(
         {
-          num: contentNum,
+          id: String(contentNum),
           title: title,
           writer: id,
           pw: pw,
           textArea: textArea,
+          time: date2String(new Date()),
         },
         nowPage.path
       );
-
       // 데이터를 성공적으로 저장한 후 페이지를 이동
       nav(nowPage.path);
     } else {
@@ -98,12 +122,16 @@ const WriteArea = () => {
     axios
       .get("http://localhost:3000/" + pageId)
       .then((v) => {
-        setContentNum(v.data[v.data.length - 1].num + 1);
+        setContentNum(Number(v.data[v.data.length - 1].id) + 1);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [pageId]);
+  useEffect(() => {
+    console.log(textArea);
+  }, [textArea]);
+
   return (
     <>
       <div className="underline">
@@ -173,15 +201,12 @@ const WriteArea = () => {
               name="TextArea"
               rules={[{ required: true, message: "내용을 입력하시오." }]}
             >
-              <TextArea
-                showCount
-                maxLength={3000}
-                onChange={TextAreaonChange}
-                placeholder="내용을 입력하시오."
-                style={{
-                  height: 600,
-                  resize: "none",
-                }}
+              <ReactQuill
+                value={textArea}
+                onChange={setTextArea}
+                style={{ height: "600px" }}
+                modules={modules}
+                formats={formats}
               />
             </Form.Item>
           </Col>

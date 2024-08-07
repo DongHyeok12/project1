@@ -21,8 +21,7 @@ const NavBar = (props: navBarProps) => {
         }
       );
     }
-  }, [props]);
-  console.log(props.path);
+  }, [props, setPathLabel]);
 
   return (
     <>
@@ -37,7 +36,7 @@ const NavBar = (props: navBarProps) => {
           홈
         </Link>
         {links.map((pathLabel) => (
-          <Link
+          <a
             key={pathLabel.path}
             className={`NavBar${
               props.path.startsWith(pathLabel.path) ||
@@ -45,10 +44,10 @@ const NavBar = (props: navBarProps) => {
                 ? " selected"
                 : ""
             }`}
-            to={pathLabel.path}
+            href={pathLabel.path}
           >
             {pathLabel.label}
-          </Link>
+          </a>
         ))}
       </div>
     </>
