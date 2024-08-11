@@ -1,103 +1,101 @@
 import { Button, Col, Form, Input, Row } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { links } from "constant";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { ContentsListType } from "type/contents";
 import axios from "axios";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
-import { quillModules, quillToolbar } from "utill/configQuill";
+import { quillModules, quillToolbar } from "utill/quill/configQuill";
 import { dateToString } from "utill/dateFomat";
+import { postContent } from "api/contents/postContents";
+import { isValidContent } from "utill/contents/validation";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
 const WriteArea = () => {
-  const { pageId } = useParams();
-  const [contentNum, setContentNum] = useState(0);
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
-  const [title, setTitle] = useState("");
-  const [textArea, setTextArea] = useState("");
   const nav = useNavigate();
+  const { pageId } = useParams();
+
+  const [formData, setFormData] = useState<any>({
+    contentNum: 0,
+    id: "",
+    pw: "",
+    title: "",
+    textArea: "",
+  });
+
+  const [isDisable, setIsDisable] = useState(true);
 
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
     label: "알 수 없는",
   };
 
-  // ~
-  const postData = (data: ContentsListType, value: string) => {
-    axios
-      .post("http://localhost:3308" + value, data)
-      .then(() => {})
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prevData: any) => ({ ...prevData, [field]: value }));
   };
 
-  // ~
-  const isCheckUpload = () => {
-    if (
-      id.length < 9 &&
-      id.length > 0 &&
-      pw.length < 11 &&
-      pw.length > 3 &&
-      title.length > 0 &&
-      textArea.length > 0
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  const handleSave = useCallback(async () => {
+    setIsDisable(true);
+    const { contentNum, id, pw, title, textArea } = formData;
 
-  // ~
-  const [isDisable, setIsDisable] = useState(false);
+    const result = await postContent(
+      {
+        id: String(contentNum),
+        title,
+        writer: id,
+        pw,
+        textArea,
+        time: dateToString(new Date()),
+      },
+      nowPage.path
+    );
 
-  // ~
-  const handleSave = () => {
-    if (isCheckUpload()) {
-      setIsDisable(true);
-
-      postData(
-        {
-          id: String(contentNum),
-          title: title,
-          writer: id,
-          pw: pw,
-          textArea: textArea,
-          time: dateToString(new Date()),
-        },
-        nowPage.path
-      );
-      // 데이터를 성공적으로 저장한 후 페이지를 이동
+    if (result) {
       nav(nowPage.path);
     } else {
-      alert("잘못된 데이터가 있습니다.");
+      alert("게시물 저장에 실패했습니다.");
     }
-  };
+  }, [formData, nowPage.path, nav]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3308/" + pageId)
-      .then((v) => {
-        setContentNum(Number(v.data[v.data.length - 1].id) + 1);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const { id, pw, title, textArea } = formData;
+    setIsDisable(!isValidContent(id, pw, title, textArea));
+
+    return () => {
+      setIsDisable(true);
+    };
+  }, [formData]);
+
+  useEffect(() => {
+    const fetchContentNum = async () => {
+      try {
+        const response = await axios.get("http://localhost:3308/" + pageId);
+        const lastContentNum = Number(
+          response.data[response.data.length - 1].id
+        );
+        setFormData((prevData: any) => ({
+          ...prevData,
+          contentNum: lastContentNum + 1,
+        }));
+      } catch (error) {
+        console.error("Error fetching content number:", error);
+      }
+    };
+
+    fetchContentNum();
   }, [pageId]);
 
   return (
     <>
       <div className="underline">
-        <Link className="SubHead_a" to={`${nowPage.path}`}>
+        <Link className="SubHead_a" to={nowPage.path}>
           {nowPage.label}
         </Link>{" "}
-        <Link className="SubHead_b" to={`${nowPage.path}`}>
+        <Link className="SubHead_b" to={nowPage.path}>
           게시판
         </Link>
       </div>
@@ -117,7 +115,7 @@ const WriteArea = () => {
                   className="IDPWInput"
                   minLength={1}
                   maxLength={20}
-                  onChange={(e) => setId(e.target.value)}
+                  onChange={(e) => handleInputChange("id", e.target.value)}
                 />
               </Form.Item>
             </Col>
@@ -141,7 +139,7 @@ const WriteArea = () => {
                 <Input.Password
                   className="IDPWInput"
                   maxLength={20}
-                  onChange={(e) => setPw(e.target.value)}
+                  onChange={(e) => handleInputChange("pw", e.target.value)}
                 />
               </Form.Item>
             </Col>
@@ -155,7 +153,7 @@ const WriteArea = () => {
               <Input
                 showCount
                 maxLength={50}
-                onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => handleInputChange("title", e.target.value)}
               />
             </Form.Item>
           </Col>
@@ -165,8 +163,8 @@ const WriteArea = () => {
               rules={[{ required: true, message: "내용을 입력하시오." }]}
             >
               <ReactQuill
-                value={textArea}
-                onChange={setTextArea}
+                value={formData.textArea}
+                onChange={(value) => handleInputChange("textArea", value)}
                 style={{ height: "600px" }}
                 modules={quillModules}
                 formats={quillToolbar}
