@@ -203,6 +203,8 @@ td:last-child {
   align-self: center;
   width: inherit;
   height: 100vh;
+}
+.detailTitle {
   font-size: 18px;
 }
 
@@ -225,7 +227,15 @@ td:last-child {
 }
 
 .contentText {
-  font-size: 16px;
   margin-top: 20px;
   white-space: pre-wrap;
+}
+
+/* commentArea.css */
+.commentArea {
+  margin-top: 30px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  font-size: 18px;
+  border-bottom: 2px solid #ffd700;
 }

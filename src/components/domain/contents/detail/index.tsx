@@ -8,6 +8,7 @@ import { Button } from "antd";
 const DetailContents = () => {
   const { pageId, contentsNumber } = useParams();
   const [data, setData] = useState<ContentsListType | null>(null);
+  const [loading, setLoading] = useState(true);
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
     label: "알 수 없는",
@@ -35,13 +36,32 @@ const DetailContents = () => {
       .get(`http://localhost:3000/${pageId}?id=${contentsNumber}`)
       .then((res) => {
         setData(res.data[0]);
+        setLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   }, [pageId, contentsNumber]);
+  if (loading) {
+    return <div>로딩 중입니다...</div>;
+  }
+
   if (!data) {
-    return <div>Loading...</div>;
+    let timer = 3;
+    const time = setInterval(() => {
+      timer -= 1;
+      if (timer === 0) {
+        clearInterval(time);
+        nav("/");
+      }
+    }, 1000);
+
+    return (
+      <>
+        <div>존재하지 않는 게시글 입니다. {timer}초 후 홈으로 이동합니다.</div>
+      </>
+    );
   }
 
   return (
@@ -56,13 +76,18 @@ const DetailContents = () => {
       </div>
       <div className="contentsDetail">
         <div className="detailLine">
-          <span>{data.title}</span> <span className="time">{data.time}</span>
+          <span className="detailTitle">{data.title}</span>{" "}
+          <span className="time">{data.time}</span>
           <Button className="delBt" onClick={deleteData}>
             게시글 삭제
           </Button>
         </div>
         <div className="writerLine">{data.writer}</div>
-        <div className="contentText">{data.textArea}</div>
+        <div
+          dangerouslySetInnerHTML={{ __html: data.textArea }}
+          className="contentText"
+        />
+        <div className="commentArea">댓글</div>
       </div>
     </>
   );

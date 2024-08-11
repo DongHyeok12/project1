@@ -12,7 +12,6 @@ const ContentsList = (props: pageIdType) => {
   const { pageId } = props;
   const [pageNum, setPageNum] = useSearchParams({ page: "1" });
   const page = Number(pageNum.get("page"));
-  console.log(page);
   function sortData(data: ContentsListType[]) {
     data.sort(function (a: ContentsListType, b: ContentsListType) {
       return Number(b.id) - Number(a.id);
@@ -32,26 +31,7 @@ const ContentsList = (props: pageIdType) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [pageId, pageNum]);
-
-  // 컨텐츠를 불러오는 API 호출
-  // const getContentsApi = async () => {
-  //   try {
-  //     // API 호출
-  //     const result = await getContents(page);
-
-  //     // 컨텐츠 저장
-  //     setContentsList(result.contents);
-  //   } catch (error) {
-  //     // 실패 했을 경우, error 메시지 표시
-  //     console.error(error);
-  //     alert(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getContentsApi(); // 초기 or 페이지 변경 시, API 호출
-  // }, [page]);
+  }, [page, pageId, pageNum, setPageNum]);
 
   return (
     <>
@@ -76,7 +56,6 @@ const ContentsList = (props: pageIdType) => {
           ))}
         </tbody>
       </table>
-      {console.log(page)}
       <Pagination
         style={{ float: "right" }}
         current={page}

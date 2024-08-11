@@ -2,18 +2,25 @@ import { Button, Col, Form, Input, Row } from "antd";
 import { useEffect, useState } from "react";
 import { links } from "constant";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import PictureUpload from "components/common/PictureUpload";
 import { ContentsListType } from "type/contents";
 import axios from "axios";
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { ImageActions } from "@xeger/quill-image-actions";
+import { ImageFormats } from "@xeger/quill-image-formats";
+
+Quill.register("modules/imageActions", ImageActions);
+Quill.register("modules/imageFormats", ImageFormats);
+
 const modules = {
+  imageActions: {},
+  imageFormats: {},
   toolbar: {
     container: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike"],
       ["image", "video"],
-      [{ list: "ordered" }, { list: "bullet" }],
+
       [{ color: [] }, { background: [] }],
       [{ align: [] }],
     ],
@@ -28,8 +35,7 @@ const formats = [
   "underline",
   "strike",
   "align",
-  "list",
-  "bullet",
+  "float",
   "indent",
   "background",
   "color",
@@ -128,9 +134,6 @@ const WriteArea = () => {
         console.log(err);
       });
   }, [pageId]);
-  useEffect(() => {
-    console.log(textArea);
-  }, [textArea]);
 
   return (
     <>
@@ -210,14 +213,12 @@ const WriteArea = () => {
               />
             </Form.Item>
           </Col>
-          <Form.Item>
-            <PictureUpload />
-          </Form.Item>
+
           <Col span={30}>
             <Form.Item>
               <Button
                 id="Save"
-                style={{ float: "right" }}
+                style={{ float: "right", marginTop: "40px" }}
                 onClick={handleSave}
                 disabled={isDisable}
               >
