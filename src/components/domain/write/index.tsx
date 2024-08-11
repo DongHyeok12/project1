@@ -8,42 +8,12 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { ImageActions } from "@xeger/quill-image-actions";
 import { ImageFormats } from "@xeger/quill-image-formats";
+import { quillModules, quillToolbar } from "utill/configQuill";
+import { dateToString } from "utill/dateFomat";
 
 Quill.register("modules/imageActions", ImageActions);
 Quill.register("modules/imageFormats", ImageFormats);
 
-const modules = {
-  imageActions: {},
-  imageFormats: {},
-  toolbar: {
-    container: [
-      [{ header: [1, 2, 3, false] }],
-      ["bold", "italic", "underline", "strike"],
-      ["image", "video"],
-
-      [{ color: [] }, { background: [] }],
-      [{ align: [] }],
-    ],
-  },
-};
-const formats = [
-  "header",
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "align",
-  "float",
-  "indent",
-  "background",
-  "color",
-  "image",
-  "video",
-  "width",
-  "font-color",
-];
 const WriteArea = () => {
   const { pageId } = useParams();
   const [contentNum, setContentNum] = useState(0);
@@ -52,40 +22,23 @@ const WriteArea = () => {
   const [title, setTitle] = useState("");
   const [textArea, setTextArea] = useState("");
   const nav = useNavigate();
-  const date2String = (date: Date) =>
-    `${String(date.getFullYear())}.${String(date.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}.${String(date.getDate()).padStart(2, "0")} ${String(
-      date.getHours()
-    ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
     label: "알 수 없는",
   };
-  const IDonChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setId(e.target.value);
-  };
-  const PWonChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setPw(e.target.value);
-  };
-  const TitleonChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setTitle(e.target.value);
-  };
+
+  // ~
   const postData = (data: ContentsListType, value: string) => {
     axios
-      .post("http://localhost:3000" + value, data)
+      .post("http://localhost:3308" + value, data)
       .then(() => {})
       .catch((err) => {
         console.log(err);
       });
   };
+
+  // ~
   const isCheckUpload = () => {
     if (
       id.length < 9 &&
@@ -101,7 +54,10 @@ const WriteArea = () => {
     }
   };
 
+  // ~
   const [isDisable, setIsDisable] = useState(false);
+
+  // ~
   const handleSave = () => {
     if (isCheckUpload()) {
       setIsDisable(true);
@@ -113,7 +69,7 @@ const WriteArea = () => {
           writer: id,
           pw: pw,
           textArea: textArea,
-          time: date2String(new Date()),
+          time: dateToString(new Date()),
         },
         nowPage.path
       );
@@ -126,7 +82,7 @@ const WriteArea = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/" + pageId)
+      .get("http://localhost:3308/" + pageId)
       .then((v) => {
         setContentNum(Number(v.data[v.data.length - 1].id) + 1);
       })
@@ -161,7 +117,7 @@ const WriteArea = () => {
                   className="IDPWInput"
                   minLength={1}
                   maxLength={20}
-                  onChange={IDonChange}
+                  onChange={(e) => setId(e.target.value)}
                 />
               </Form.Item>
             </Col>
@@ -185,7 +141,7 @@ const WriteArea = () => {
                 <Input.Password
                   className="IDPWInput"
                   maxLength={20}
-                  onChange={PWonChange}
+                  onChange={(e) => setPw(e.target.value)}
                 />
               </Form.Item>
             </Col>
@@ -196,7 +152,11 @@ const WriteArea = () => {
               label="제&nbsp;&nbsp;&nbsp;&nbsp;목"
               rules={[{ required: true, message: "제목을 입력하시오." }]}
             >
-              <Input showCount maxLength={50} onChange={TitleonChange} />
+              <Input
+                showCount
+                maxLength={50}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </Form.Item>
           </Col>
           <Col>
@@ -208,8 +168,8 @@ const WriteArea = () => {
                 value={textArea}
                 onChange={setTextArea}
                 style={{ height: "600px" }}
-                modules={modules}
-                formats={formats}
+                modules={quillModules}
+                formats={quillToolbar}
               />
             </Form.Item>
           </Col>
