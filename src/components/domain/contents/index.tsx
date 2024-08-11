@@ -22,7 +22,7 @@ const ContentsList = (props: pageIdType) => {
       setPageNum({ page: "1" });
     }
     axios
-      .get("http://localhost:3000/" + pageId)
+      .get("http://localhost:3306/" + pageId)
       .then((res) => {
         sortData(res.data);
         setTotalItems(res.data.length);

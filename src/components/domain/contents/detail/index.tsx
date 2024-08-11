@@ -20,7 +20,7 @@ const DetailContents = () => {
       const isPass = inputPw === data.pw;
       if (isPass) {
         axios
-          .delete(`http://localhost:3000/${pageId}/${contentsNumber}`)
+          .delete(`http://localhost:3306/${pageId}/${contentsNumber}`)
           .then(() => {
             alert("삭제되었습니다!");
             nav(`/${pageId}`);
@@ -33,7 +33,7 @@ const DetailContents = () => {
   }
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/${pageId}?id=${contentsNumber}`)
+      .get(`http://localhost:3306/${pageId}?id=${contentsNumber}`)
       .then((res) => {
         setData(res.data[0]);
         setLoading(false);
