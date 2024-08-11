@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     // 데이터 가져오기
     axios
-      .get<Post[]>("http://localhost:3306/posts")
+      .get<Post[]>("http://localhost:3308/posts")
       .then((response) => {
         setData(response.data);
       })
