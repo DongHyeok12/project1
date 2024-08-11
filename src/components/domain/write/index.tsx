@@ -80,7 +80,7 @@ const WriteArea = () => {
   };
   const postData = (data: ContentsListType, value: string) => {
     axios
-      .post("http://localhost:3000" + value, data)
+      .post("http://localhost:3306" + value, data)
       .then(() => {})
       .catch((err) => {
         console.log(err);
@@ -126,7 +126,7 @@ const WriteArea = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/" + pageId)
+      .get("http://localhost:3306/" + pageId)
       .then((v) => {
         setContentNum(Number(v.data[v.data.length - 1].id) + 1);
       })
