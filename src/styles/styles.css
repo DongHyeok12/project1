@@ -140,12 +140,14 @@ a:active {
 .SubHeadLayout main {
   /* flex: 1; 남은 공간을 채우도록 */
   padding: 20px; /* 패딩 */
+  place-self: center;
 }
 
 /*thead.css*/
 table {
-  display: block;
+  display: inline-block;
   table-layout: fixed;
+  align-content: center;
 }
 thead {
   border-bottom: 2px solid gold;
@@ -167,19 +169,23 @@ td:last-child {
   border-right: none;
 }
 .thNum {
-  width: 15vw;
+  width: 8vw;
   text-align: center;
 }
 
 .thTitle {
-  width: 65vw;
+  width: 35vw;
 }
 
 .thWriter {
-  width: 20vw;
+  width: 12vw;
   text-align: center;
 }
 
+.thView {
+  width: 5vw;
+  text-align: center;
+}
 /* postarea.css */
 
 .PostArea {
@@ -200,7 +206,7 @@ td:last-child {
 /* contentsDetail.css */
 .contentsDetail {
   padding: 20px;
-  align-self: center;
+
   width: inherit;
   height: 100vh;
 }
@@ -209,7 +215,7 @@ td:last-child {
 }
 
 .time {
-  font-size: 10px;
+  font-size: 13px;
   color: gray;
 }
 
@@ -231,6 +237,40 @@ td:last-child {
   white-space: pre-wrap;
 }
 
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-justify {
+  text-align: justify;
+}
+.ql-video {
+  display: block;
+  align-items: inherit;
+}
+
+.ql-video.ql-align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ql-video.ql-align-right {
+  display: block;
+  float: right;
+}
+
+.ql-video.ql-align-justify {
+  text-align: justify;
+}
+
+.image-actions__toolbar-button {
+  display: none !important; /* !important로 우선 순위 조정 */
+}
 /* commentArea.css */
 .commentArea {
   margin-top: 30px;
@@ -238,4 +278,10 @@ td:last-child {
   font-weight: bolder;
   font-size: 18px;
   border-bottom: 2px solid #ffd700;
+}
+
+/* pagination.css */
+.pagination {
+  margin-top: 20px;
+  text-align: center;
 }
