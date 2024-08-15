@@ -10,6 +10,7 @@ import { dateToString } from "utill/dateFomat";
 import { postContent } from "api/contents/postContents";
 import { isValidContent } from "utill/contents/validation";
 import { ContentsDetailType } from "type/contents";
+import { encryptPw } from "api/password";
 
 const WriteArea = () => {
   const nav = useNavigate();
@@ -47,7 +48,7 @@ const WriteArea = () => {
         id: String(id),
         title,
         writer,
-        pw,
+        pw: encryptPw(pw),
         textArea,
         time: dateToString(new Date()),
         view,

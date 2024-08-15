@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { links } from "constant/index";
 import { Button } from "antd";
+import { decryptPw } from "api/password";
 
 const DetailContents = () => {
   const { pageId, contentsNumber } = useParams();
@@ -14,10 +15,11 @@ const DetailContents = () => {
     label: "알 수 없는",
   };
   const nav = useNavigate();
+
   function deleteData() {
     if (data) {
       const inputPw = prompt("비밀번호를 입력하세요");
-      const isPass = inputPw === data.pw;
+      const isPass = decryptPw(data.pw) === inputPw;
       if (isPass) {
         axios
           .delete(`http://localhost:3308/${pageId}/${contentsNumber}`)
@@ -40,7 +42,7 @@ const DetailContents = () => {
           .patch(`http://localhost:3308/${pageId}/${contentsNumber}`, {
             view: +fetchData.view + 1,
           })
-          .then((resp) => {
+          .then(() => {
             setData(res.data[0]);
             setLoading(false);
           })
@@ -84,6 +86,7 @@ const DetailContents = () => {
           게시판
         </Link>
       </div>
+
       <div className="contentsDetail">
         <div className="detailLine">
           <span className="detailTitle">{data.title}</span>{" "}
