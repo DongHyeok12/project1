@@ -1,15 +1,25 @@
+import { Quill } from "react-quill";
+import { ImageActions } from "@xeger/quill-image-actions";
+
+Quill.register("modules/imageActions", ImageActions);
+
 export const quillModules = {
   imageActions: {},
-  imageFormats: {},
+
   toolbar: {
     container: [
       [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike"],
       ["image", "video"],
-
       [{ color: [] }, { background: [] }],
-      [{ align: [] }],
+      [
+        { align: "" },
+        { align: "center" },
+        { align: "right" },
+        { align: "justify" },
+      ],
     ],
+    imageResize: { module: ["Resize"], align: "disable" },
   },
 };
 export const quillToolbar = [
@@ -28,5 +38,6 @@ export const quillToolbar = [
   "image",
   "video",
   "width",
+  "height",
   "font-color",
 ];
