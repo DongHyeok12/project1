@@ -1,33 +1,33 @@
 import { Button, Col, Form, Input, Row } from "antd";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { links } from "constant";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { ImageActions } from "@xeger/quill-image-actions";
-import { ImageFormats } from "@xeger/quill-image-formats";
 import { quillModules, quillToolbar } from "utill/quill/configQuill";
 import { dateToString } from "utill/dateFomat";
 import { postContent } from "api/contents/postContents";
 import { isValidContent } from "utill/contents/validation";
-
-Quill.register("modules/imageActions", ImageActions);
-Quill.register("modules/imageFormats", ImageFormats);
+import { ContentsDetailType } from "type/contents";
 
 const WriteArea = () => {
   const nav = useNavigate();
   const { pageId } = useParams();
 
-  const [formData, setFormData] = useState<any>({
-    contentNum: 0,
-    id: "",
+  const [formData, setFormData] = useState<ContentsDetailType>({
+    id: "1",
+    writer: "",
     pw: "",
     title: "",
     textArea: "",
+    time: "",
+    view: 0,
   });
 
   const [isDisable, setIsDisable] = useState(true);
+
+  const quillRef = useRef<ReactQuill>(null);
 
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
@@ -40,16 +40,17 @@ const WriteArea = () => {
 
   const handleSave = useCallback(async () => {
     setIsDisable(true);
-    const { contentNum, id, pw, title, textArea } = formData;
+    const { id, writer, pw, title, textArea, view } = formData;
 
     const result = await postContent(
       {
-        id: String(contentNum),
+        id: String(id),
         title,
-        writer: id,
+        writer,
         pw,
         textArea,
         time: dateToString(new Date()),
+        view,
       },
       nowPage.path
     );
@@ -62,8 +63,8 @@ const WriteArea = () => {
   }, [formData, nowPage.path, nav]);
 
   useEffect(() => {
-    const { id, pw, title, textArea } = formData;
-    setIsDisable(!isValidContent(id, pw, title, textArea));
+    const { writer, pw, title, textArea } = formData;
+    setIsDisable(!isValidContent(writer, pw, title, textArea));
 
     return () => {
       setIsDisable(true);
@@ -77,9 +78,9 @@ const WriteArea = () => {
         const lastContentNum = Number(
           response.data[response.data.length - 1].id
         );
-        setFormData((prevData: any) => ({
+        setFormData((prevData: ContentsDetailType) => ({
           ...prevData,
-          contentNum: lastContentNum + 1,
+          id: String(lastContentNum + 1),
         }));
       } catch (error) {
         console.error("Error fetching content number:", error);
@@ -88,7 +89,9 @@ const WriteArea = () => {
 
     fetchContentNum();
   }, [pageId]);
-
+  useEffect(() => {
+    console.log(formData.textArea);
+  }, [formData.textArea]);
   return (
     <>
       <div className="underline">
@@ -104,7 +107,7 @@ const WriteArea = () => {
           <Row>
             <Col>
               <Form.Item
-                name="ID"
+                name="writer"
                 label="닉&nbsp;네&nbsp;임"
                 rules={[
                   { required: true, message: "닉네임을 입력하시오." },
@@ -115,7 +118,7 @@ const WriteArea = () => {
                   className="IDPWInput"
                   minLength={1}
                   maxLength={20}
-                  onChange={(e) => handleInputChange("id", e.target.value)}
+                  onChange={(e) => handleInputChange("writer", e.target.value)}
                 />
               </Form.Item>
             </Col>
@@ -163,6 +166,7 @@ const WriteArea = () => {
               rules={[{ required: true, message: "내용을 입력하시오." }]}
             >
               <ReactQuill
+                ref={quillRef}
                 value={formData.textArea}
                 onChange={(value) => handleInputChange("textArea", value)}
                 style={{ height: "600px" }}

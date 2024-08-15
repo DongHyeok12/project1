@@ -1,28 +1,28 @@
 /**
  *
- * @param id
+ * @param writer
  * @param pw
  * @param title
  * @param textArea
  * @returns
  */
 export const isValidContent = (
-  id: string,
+  writer: string,
   pw: string,
   title: string,
   textArea: string
 ): boolean => {
   return (
-    isValidNickname(id) &&
+    isValidNickname(writer) &&
     isValidPassword(pw) &&
     isValidTitle(title) &&
     isValidTextarea(textArea)
   );
 };
 
-export const isValidNickname = (id: string): boolean => {
+export const isValidNickname = (writer: string): boolean => {
   // 닉네임 유효성 검사 로직 추가 (예: 길이, 특수문자 등)
-  return id.length > 0 && id.length <= 8;
+  return writer.length > 0 && writer.length <= 8;
 };
 
 export const isValidPassword = (pw: string): boolean => {

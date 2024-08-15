@@ -1,4 +1,4 @@
-import { ContentsListType } from "type/contents";
+import { ContentsDetailType } from "type/contents";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import { Button } from "antd";
 
 const DetailContents = () => {
   const { pageId, contentsNumber } = useParams();
-  const [data, setData] = useState<ContentsListType | null>(null);
+  const [data, setData] = useState<ContentsDetailType | null>(null);
   const [loading, setLoading] = useState(true);
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
@@ -35,14 +35,25 @@ const DetailContents = () => {
     axios
       .get(`http://localhost:3308/${pageId}?id=${contentsNumber}`)
       .then((res) => {
-        setData(res.data[0]);
-        setLoading(false);
+        const fetchData: ContentsDetailType = res.data[0];
+        axios
+          .patch(`http://localhost:3308/${pageId}/${contentsNumber}`, {
+            view: +fetchData.view + 1,
+          })
+          .then((resp) => {
+            setData(res.data[0]);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
   }, [pageId, contentsNumber]);
+
   if (loading) {
     return <div>로딩 중입니다...</div>;
   }
@@ -53,17 +64,16 @@ const DetailContents = () => {
       timer -= 1;
       if (timer === 0) {
         clearInterval(time);
-        nav("/");
+        nav("/" + pageId);
       }
     }, 1000);
 
     return (
       <>
-        <div>존재하지 않는 게시글 입니다. {timer}초 후 홈으로 이동합니다.</div>
+        <div>존재하지 않는 게시글 입니다. 3초 후 게시판으로 돌아갑니다.</div>
       </>
     );
   }
-
   return (
     <>
       <div className="underline">
@@ -81,6 +91,7 @@ const DetailContents = () => {
           <Button className="delBt" onClick={deleteData}>
             게시글 삭제
           </Button>
+          <div className="time">조회수 : {data.view}</div>
         </div>
         <div className="writerLine">{data.writer}</div>
         <div

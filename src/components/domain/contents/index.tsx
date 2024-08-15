@@ -1,19 +1,19 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ContentsListType } from "type/contents";
+import { ContentsDetailType } from "type/contents";
 import axios from "axios";
 import { Pagination } from "antd";
 interface pageIdType {
   pageId: string;
 }
 const ContentsList = (props: pageIdType) => {
-  const [contentsList, setContentsList] = useState<ContentsListType[]>([]);
+  const [contentsList, setContentsList] = useState<ContentsDetailType[]>([]);
   const [totalItems, setTotalItems] = useState<number>(0);
   const { pageId } = props;
   const [pageNum, setPageNum] = useSearchParams({ page: "1" });
   const page = Number(pageNum.get("page"));
-  function sortData(data: ContentsListType[]) {
-    data.sort(function (a: ContentsListType, b: ContentsListType) {
+  function sortData(data: ContentsDetailType[]) {
+    data.sort(function (a: ContentsDetailType, b: ContentsDetailType) {
       return Number(b.id) - Number(a.id);
     });
   }
@@ -41,6 +41,7 @@ const ContentsList = (props: pageIdType) => {
             <th className="thNum">번호</th>
             <th className="thTitle">제목</th>
             <th className="thWriter">작성자</th>
+            <th className="thView">조회수</th>
           </tr>
         </thead>
         <tbody>
@@ -52,12 +53,13 @@ const ContentsList = (props: pageIdType) => {
                 <span className="time">{v.time}</span>
               </td>
               <td className="thWriter">{v.writer}</td>
+              <td className="thView">{v.view}</td>
             </tr>
           ))}
         </tbody>
       </table>
       <Pagination
-        style={{ float: "right" }}
+        className="pagination"
         current={page}
         total={totalItems}
         pageSize={15}

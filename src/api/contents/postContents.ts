@@ -1,4 +1,4 @@
-import { ContentsListType } from "@type/contents";
+import { ContentsDetailType } from "type/contents";
 import { Post } from "..";
 
 /**
@@ -6,9 +6,9 @@ import { Post } from "..";
  * @param data
  * @param path
  */
-export const postContent = async (data: ContentsListType, path: string) => {
+export const postContent = async (data: ContentsDetailType, path: string) => {
   try {
-    const response = await Post<ContentsListType>(path, data);
+    const response = await Post<ContentsDetailType>(path, data);
     return response;
   } catch (error) {
     console.log(error);
