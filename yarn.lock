@@ -2824,13 +2824,6 @@
     core-js "^3.0"
     deepmerge "^4.2"
 
-"@xeger/quill-image-formats@^0.7.2":
-  version "0.7.2"
-  resolved "https://registry.npmjs.org/@xeger/quill-image-formats/-/quill-image-formats-0.7.2.tgz"
-  integrity sha512-L9beiJKWzjHxBJEZB21I8YjFgOHYROsrfFMvIqP+kjc/u/MecHY1mXzR9VySLr+Qvj55t+vkKKuJ0ZPKvQSaPA==
-  dependencies:
-    core-js "^3.0"
-
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@xtuc/ieee754/-/ieee754-1.2.0.tgz"
@@ -8547,7 +8540,6 @@ process@^0.11.10:
     "@types/react" "^18.3.3"
     "@types/react-dom" "^18.3.0"
     "@xeger/quill-image-actions" "^0.7.2"
-    "@xeger/quill-image-formats" "^0.7.2"
     antd "^5.18.3"
     antd-img-crop "^4.22.0"
     axios "^1.7.2"

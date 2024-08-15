@@ -3,13 +3,13 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@components/*": ["components/*"],
-      "@styles/*": ["styles/*"],
-      "@pages/*": ["pages/*"],
-      "@constant/*": ["constant/*"],
-      "@recoil/*": ["recoil/*"],
-      "@type/*": ["type/*"],
-      "@api/*": ["api/*"]
+      "components/*": ["components/*"],
+      "styles/*": ["styles/*"],
+      "pages/*": ["pages/*"],
+      "constant/*": ["constant/*"],
+      "recoil/*": ["recoil/*"],
+      "type/*": ["type/*"],
+      "api/*": ["api/*"]
     },
     "target": "es6", // ES6로 설정
     "lib": ["dom", "dom.iterable", "esnext"],

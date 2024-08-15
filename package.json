@@ -13,7 +13,6 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@xeger/quill-image-actions": "^0.7.2",
-    "@xeger/quill-image-formats": "^0.7.2",
     "antd": "^5.18.3",
     "antd-img-crop": "^4.22.0",
     "axios": "^1.7.2",
