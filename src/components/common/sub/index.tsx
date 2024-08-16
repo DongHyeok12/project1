@@ -1,6 +1,6 @@
 import { pathLabelState } from "recoil/atoms/PathLabelAtoms";
-import WriteButton from "components/domain/write/WriteButton";
 import { useRecoilValue } from "recoil";
+import WriteButton from "../WriteButton";
 
 const SubHead = () => {
   const pathLabel = useRecoilValue(pathLabelState);
