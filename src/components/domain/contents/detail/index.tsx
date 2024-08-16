@@ -1,10 +1,12 @@
 import { ContentsDetailType } from "type/contents";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { links } from "constant/index";
 import { Button } from "antd";
 import { decryptPw } from "api/password";
+import { deleteContent } from "api/contents/deleteContent";
+import { getContent } from "api/contents/getContent";
+import { patchContent } from "api/contents/patchContent";
 
 const DetailContents = () => {
   const { pageId, contentsNumber } = useParams();
@@ -21,40 +23,32 @@ const DetailContents = () => {
       const inputPw = prompt("비밀번호를 입력하세요");
       const isPass = decryptPw(data.pw) === inputPw;
       if (isPass) {
-        axios
-          .delete(`http://localhost:3308/${pageId}/${contentsNumber}`)
-          .then(() => {
-            alert("삭제되었습니다!");
-            nav(`/${pageId}`);
-          })
-          .catch((err) => console.log(err));
+        deleteContent(`/${pageId}/${contentsNumber}`);
+        alert("삭제되었습니다!");
+        nav(`/${pageId}`);
       } else if (inputPw) {
         alert("비밀번호가 일치하지 않습니다.");
       }
     }
   }
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:3308/${pageId}?id=${contentsNumber}`)
-      .then((res) => {
-        const fetchData: ContentsDetailType = res.data[0];
-        axios
-          .patch(`http://localhost:3308/${pageId}/${contentsNumber}`, {
-            view: +fetchData.view + 1,
-          })
-          .then(() => {
-            setData(res.data[0]);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+    //db에서 해당 데이터 받아오기
+    const fecthData = async () => {
+      const res = await getContent(`/${pageId}?id=${contentsNumber}`);
+      if (res) {
+        //조회수 1 추가
+        await patchContent(`/${pageId}/${contentsNumber}`, {
+          view: +res.view + 1,
+        });
+        setData(res);
+      }
+      setLoading(false);
+    };
+    fecthData();
   }, [pageId, contentsNumber]);
+
+  useEffect(() => {}, []);
 
   if (loading) {
     return <div>로딩 중입니다...</div>;
@@ -71,9 +65,7 @@ const DetailContents = () => {
     }, 1000);
 
     return (
-      <>
-        <div>존재하지 않는 게시글 입니다. 3초 후 게시판으로 돌아갑니다.</div>
-      </>
+      <div>존재하지 않는 게시글 입니다. 3초 후 게시판으로 돌아갑니다.</div>
     );
   }
   return (

@@ -7,7 +7,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { quillModules, quillToolbar } from "utill/quill/configQuill";
 import { dateToString } from "utill/dateFomat";
-import { postContent } from "api/contents/postContents";
+import { postContent } from "api/contents/postContent";
 import { isValidContent } from "utill/contents/validation";
 import { ContentsDetailType } from "type/contents";
 import { encryptPw } from "api/password";
