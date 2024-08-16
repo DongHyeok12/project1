@@ -1,16 +1,17 @@
 import { ContentsDetailType } from "type/contents";
-import { Post } from "..";
+import { Delete } from "..";
 
 /**
  *
  * @param data
  * @param path
  */
-export const postContent = async (data: ContentsDetailType, path: string) => {
+export const deleteContent = async (path: string) => {
   try {
-    const response = await Post<ContentsDetailType>(path, data);
+    const response = await Delete<ContentsDetailType>(path);
     return response;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };

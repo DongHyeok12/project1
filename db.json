@@ -265,7 +265,7 @@
       "pw": "password29",
       "textArea": "<p>유머 게시글 29 내용</p>",
       "time": "2024.08.15 11:20",
-      "view": 0
+      "view": 1
     },
     {
       "id": "30",
@@ -274,7 +274,7 @@
       "pw": "password30",
       "textArea": "<p>유머 게시글 30 내용</p>",
       "time": "2024.08.15 11:25",
-      "view": 4
+      "view": 3
     }
   ],
   "free": [
@@ -546,12 +546,12 @@
       "pw": "password30",
       "textArea": "<p>자유 게시글 30 내용</p>",
       "time": "2024-07-02 05:00",
-      "view": 1
+      "view": 10
     }
   ],
   "horror": [
     {
-      "id": 0,
+      "id": "1",
       "title": "공포 게시글 1",
       "writer": "writer1",
       "pw": "password1",
@@ -569,7 +569,7 @@
       "view": 0
     },
     {
-      "id": 0,
+      "id": "3",
       "title": "공포 게시글 3",
       "writer": "writer3",
       "pw": "password3",
@@ -818,7 +818,8 @@
       "pw": "password30",
       "textArea": "<p>공포 게시글 30 내용</p>",
       "time": "2024-07-02 05:00",
-      "view": 0
+      "view": 1
     }
-  ]
+  ],
+  "comment": []
 }
