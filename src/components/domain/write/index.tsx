@@ -54,6 +54,7 @@ const WriteArea = () => {
     });
 
     if (result) {
+      alert("게시글 저장 성공!");
       nav(nowPage.path);
     } else {
       alert("게시물 저장에 실패했습니다.");
@@ -87,9 +88,7 @@ const WriteArea = () => {
 
     fetchContentNum();
   }, [pageId]);
-  useEffect(() => {
-    console.log(formData.textArea);
-  }, [formData.textArea]);
+
   return (
     <>
       <div className="underline">

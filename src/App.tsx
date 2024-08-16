@@ -9,6 +9,7 @@ import WriteArea from "components/domain/write";
 import { ConfigProvider } from "antd";
 import theme from "styles/theme";
 import DetailContents from "components/domain/contents/detail";
+import ModifyArea from "components/domain/modify";
 
 function App() {
   return (
@@ -24,10 +25,13 @@ function App() {
                 path="/:pageId/:contentsNumber"
                 element={<DetailContents />}
               />
+              <Route
+                path="/contents/modify/:pageId/:contentsNumber"
+                element={<ModifyArea />}
+              />
             </Routes>
           </HeaderLayout>
         </Router>
-        {/* <Listbox /> */}
         {/* <Footer /> */}
       </RecoilRoot>
     </ConfigProvider>

@@ -22,7 +22,9 @@ const DetailContents = () => {
     if (data) {
       const inputPw = prompt("비밀번호를 입력하세요");
       const isPass = decryptPw(data.pw) === inputPw;
-      if (isPass) {
+      if (inputPw === "") {
+        alert("비밀번호가 일치하지 않습니다.");
+      } else if (isPass) {
         deleteContent(`/${pageId}/${contentsNumber}`);
         alert("삭제되었습니다!");
         nav(`/${pageId}`);
@@ -82,9 +84,17 @@ const DetailContents = () => {
       <div className="contentsDetail">
         <div className="detailLine">
           <span className="detailTitle">{data.title}</span>{" "}
-          <span className="time">{data.time}</span>
+          <span className="time">{data.time}</span>{" "}
           <Button className="delBt" onClick={deleteData}>
             게시글 삭제
+          </Button>
+          <Button
+            className="delBt"
+            onClick={() => {
+              nav(`/contents/modify/${pageId}/${contentsNumber}`);
+            }}
+          >
+            게시글 수정
           </Button>
           <div className="time">조회수 : {data.view}</div>
         </div>
