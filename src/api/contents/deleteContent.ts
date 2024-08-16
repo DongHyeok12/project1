@@ -2,9 +2,9 @@ import { ContentsDetailType } from "type/contents";
 import { Delete } from "..";
 
 /**
- *
- * @param data
- * @param path
+ * 컨텐츠를 삭제하는 함수입니다.
+ * @param path 삭제할 컨텐츠 경로
+ * @returns
  */
 export const deleteContent = async (path: string) => {
   try {

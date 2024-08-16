@@ -43,18 +43,15 @@ const WriteArea = () => {
     setIsDisable(true);
     const { id, writer, pw, title, textArea, view } = formData;
 
-    const result = await postContent(
-      {
-        id: String(id),
-        title,
-        writer,
-        pw: encryptPw(pw),
-        textArea,
-        time: dateToString(new Date()),
-        view,
-      },
-      nowPage.path
-    );
+    const result = await postContent(nowPage.path, {
+      id: String(id),
+      title,
+      writer,
+      pw: encryptPw(pw),
+      textArea,
+      time: dateToString(new Date()),
+      view,
+    });
 
     if (result) {
       nav(nowPage.path);
