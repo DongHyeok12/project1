@@ -62,11 +62,13 @@ export async function Patch<T>(
 // Delete 요청 함수
 export async function Delete<T>(
   url: string,
-  data: any,
   config?: AxiosRequestConfig
 ): Promise<T> {
   try {
-    const response: AxiosResponse<T> = await axiosInterceptor.delete<T>(url);
+    const response: AxiosResponse<T> = await axiosInterceptor.delete<T>(
+      url,
+      config
+    );
     return response.data;
   } catch (error: any) {
     throw new Error(error);
