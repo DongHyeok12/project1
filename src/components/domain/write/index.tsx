@@ -11,6 +11,7 @@ import { postContent } from "api/contents/postContent";
 import { isValidContent } from "utill/contents/validation";
 import { ContentsDetailType } from "type/contents";
 import { encryptPw } from "api/password";
+import { getContent } from "api/contents/getContent";
 
 const WriteArea = () => {
   const nav = useNavigate();
@@ -72,17 +73,13 @@ const WriteArea = () => {
 
   useEffect(() => {
     const fetchContentNum = async () => {
-      try {
-        const response = await axios.get("http://localhost:3308/" + pageId);
-        const lastContentNum = Number(
-          response.data[response.data.length - 1].id
-        );
+      const response = await getContent("http://localhost:3308/" + pageId);
+      if (response) {
+        const lastContentNum = Number(response[response.length - 1].id);
         setFormData((prevData: ContentsDetailType) => ({
           ...prevData,
           id: String(lastContentNum + 1),
         }));
-      } catch (error) {
-        console.error("Error fetching content number:", error);
       }
     };
 

@@ -9,7 +9,7 @@ import { Get } from "..";
 export const getContent = async (path: string) => {
   try {
     const response = await Get<ContentsDetailType[]>(path);
-    return response[0];
+    return response;
   } catch (error) {
     console.log(error);
     return null;
