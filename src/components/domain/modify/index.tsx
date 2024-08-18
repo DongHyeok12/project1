@@ -1,13 +1,14 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Col, Form, Input, Modal, Row } from "antd";
+import ReactQuill from "react-quill";
 import { getContent } from "api/contents/getContent";
 import { patchContent } from "api/contents/patchContent";
 import { decryptPw } from "api/password";
 import { links } from "constant/index";
-import React, { useEffect, useRef, useState } from "react";
-import ReactQuill from "react-quill";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ContentsDetailType } from "type/contents";
 import { quillModules, quillToolbar } from "utill/quill/configQuill";
+import { isValidModify } from "utill/contents/validation";
 
 const ModifyArea = () => {
   const { pageId, contentsNumber } = useParams<{
@@ -17,7 +18,9 @@ const ModifyArea = () => {
   const [data, setData] = useState<ContentsDetailType | null>(null);
   const [loading, setLoading] = useState(true);
   const [isDisable, setIsDisable] = useState(true);
+  const [inputPw, setInputPw] = useState("");
   const quillRef = useRef<ReactQuill>(null);
+  const [modalOpen, setModalOpen] = useState(true);
   const [formData, setFormData] = useState({
     title: "",
     textArea: "",
@@ -26,32 +29,36 @@ const ModifyArea = () => {
     path: "",
     label: "알 수 없는",
   };
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prevData: any) => ({ ...prevData, [field]: value }));
-  };
+
   const nav = useNavigate();
 
   useEffect(() => {
     // 데이터를 가져오는 비동기 함수
     const fetchData = async () => {
-      const res = await getContent(`/${pageId}?id=${contentsNumber}`);
-      if (res) {
+      const response = await getContent(`/${pageId}?id=${contentsNumber}`);
+      if (response) {
+        const res = response[0];
         setData(res);
+        setFormData({
+          title: res.title,
+          textArea: res.textArea || "",
+        });
       }
-      setLoading(false);
     };
     fetchData();
   }, [pageId, contentsNumber]);
 
+  const handleInputChange = (field: string, value: string) => {
+    setFormData((prevData: any) => ({ ...prevData, [field]: value }));
+  };
+
   const handleModify = async () => {
     setIsDisable(true);
     const { title, textArea } = formData;
-
     const result = await patchContent(`/${pageId}/${contentsNumber}`, {
       title,
       textArea,
     });
-
     if (result) {
       alert("게시물 수정 성공!");
       nav(nowPage.path);
@@ -59,20 +66,64 @@ const ModifyArea = () => {
       alert("게시물 수정에 실패했습니다.");
     }
   };
-
-  useEffect(() => {
-    if (data && !loading) {
-      const inputPw = prompt("비밀번호를 입력하세요");
+  const isModalPwPass = () => {
+    if (data) {
       const isPass = decryptPw(data.pw) === inputPw;
-      if (!isPass) {
+      if (inputPw === "" || !isPass) {
         alert("비밀번호가 일치하지 않습니다.");
         nav(`/${pageId}/${contentsNumber}`);
+      } else {
+        setLoading(false);
+        setModalOpen(false);
       }
     }
-  }, [contentsNumber, data, loading, nav, pageId]);
-  useEffect(() => {}, []);
+  };
 
-  if (loading) return <>loading</>;
+  useEffect(() => {
+    const { title, textArea } = formData;
+    setIsDisable(!isValidModify(title, textArea));
+  }, [formData]);
+
+  useEffect(() => {
+    if (quillRef.current && data) {
+      quillRef.current
+        .getEditor()
+        .setContents(
+          quillRef.current.getEditor().clipboard.convert(data.textArea) || {}
+        );
+    }
+  }, [data]);
+
+  if (loading)
+    return (
+      <>
+        <Modal
+          title={<p>수정을 하시려면 비밀번호를 입력하세요.</p>}
+          open={modalOpen}
+          footer={<Button onClick={isModalPwPass}>확인</Button>}
+          closable={false}
+          closeIcon={false}
+          maskClosable={false}
+        >
+          <p>비밀번호를 입력한 후 확인 버튼을 눌러주세요.</p>
+          <label>비밀번호:&nbsp;&nbsp;&nbsp;</label>
+          <Input
+            onChange={(e) => {
+              setInputPw(e.target.value);
+            }}
+            style={{ width: "200px" }}
+          />
+        </Modal>
+        <p>loading...</p>
+      </>
+    );
+  else if (!data)
+    return (
+      <>
+        {alert("존재하지 않는 게시글 입니다.")}
+        {window.location.replace("/" + pageId)}
+      </>
+    );
 
   return (
     <>
@@ -91,8 +142,7 @@ const ModifyArea = () => {
               <Form.Item name="writer" label="닉&nbsp;네&nbsp;임">
                 <Input
                   className="IDPWInput"
-                  defaultValue={data!.writer}
-                  onChange={(e) => handleInputChange("writer", e.target.value)}
+                  defaultValue={data.writer}
                   disabled={true}
                 />
               </Form.Item>
@@ -107,7 +157,7 @@ const ModifyArea = () => {
               <Input
                 showCount
                 maxLength={50}
-                defaultValue={data!.title}
+                defaultValue={data.title}
                 onChange={(e) => handleInputChange("title", e.target.value)}
               />
             </Form.Item>
@@ -119,7 +169,8 @@ const ModifyArea = () => {
             >
               <ReactQuill
                 ref={quillRef}
-                value={data!.textArea}
+                placeholder="내용을 입력하시오."
+                value={formData.textArea}
                 onChange={(value) => handleInputChange("textArea", value)}
                 style={{ height: "600px" }}
                 modules={quillModules}
@@ -134,6 +185,7 @@ const ModifyArea = () => {
                 id="Save"
                 style={{ float: "right", marginTop: "40px" }}
                 onClick={handleModify}
+                disabled={isDisable}
               >
                 수정하기
               </Button>

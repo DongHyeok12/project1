@@ -2,7 +2,7 @@ import { ContentsDetailType } from "type/contents";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { links } from "constant/index";
-import { Button } from "antd";
+import { Button, Input, Modal } from "antd";
 import { decryptPw } from "api/password";
 import { deleteContent } from "api/contents/deleteContent";
 import { getContent } from "api/contents/getContent";
@@ -12,6 +12,8 @@ const DetailContents = () => {
   const { pageId, contentsNumber } = useParams();
   const [data, setData] = useState<ContentsDetailType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [inputPw, setInputPw] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
     label: "알 수 없는",
@@ -20,16 +22,17 @@ const DetailContents = () => {
 
   function deleteData() {
     if (data) {
-      const inputPw = prompt("비밀번호를 입력하세요");
       const isPass = decryptPw(data.pw) === inputPw;
       if (inputPw === "") {
-        alert("비밀번호가 일치하지 않습니다.");
+        alert("비밀번호를 입력하세요.");
       } else if (isPass) {
         deleteContent(`/${pageId}/${contentsNumber}`);
         alert("삭제되었습니다!");
         nav(`/${pageId}`);
       } else if (inputPw) {
         alert("비밀번호가 일치하지 않습니다.");
+        setInputPw("");
+        setModalOpen(false);
       }
     }
   }
@@ -37,8 +40,9 @@ const DetailContents = () => {
   useEffect(() => {
     //db에서 해당 데이터 받아오기
     const fecthData = async () => {
-      const res = await getContent(`/${pageId}?id=${contentsNumber}`);
-      if (res) {
+      const response = await getContent(`/${pageId}?id=${contentsNumber}`);
+      if (response) {
+        const res = response[0];
         //조회수 1 추가
         await patchContent(`/${pageId}/${contentsNumber}`, {
           view: +res.view + 1,
@@ -50,26 +54,21 @@ const DetailContents = () => {
     fecthData();
   }, [pageId, contentsNumber]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setInputPw("");
+  }, [modalOpen]);
 
   if (loading) {
     return <div>로딩 중입니다...</div>;
   }
 
-  if (!data) {
-    let timer = 3;
-    const time = setInterval(() => {
-      timer -= 1;
-      if (timer === 0) {
-        clearInterval(time);
-        nav("/" + pageId);
-      }
-    }, 1000);
-
+  if (!data)
     return (
-      <div>존재하지 않는 게시글 입니다. 3초 후 게시판으로 돌아갑니다.</div>
+      <>
+        {alert("존재하지 않는 게시글 입니다.")}
+        {window.location.replace("/" + pageId)}
+      </>
     );
-  }
   return (
     <>
       <div className="underline">
@@ -85,9 +84,31 @@ const DetailContents = () => {
         <div className="detailLine">
           <span className="detailTitle">{data.title}</span>{" "}
           <span className="time">{data.time}</span>{" "}
-          <Button className="delBt" onClick={deleteData}>
+          <Button
+            className="delBt"
+            onClick={() => {
+              setModalOpen(true);
+            }}
+          >
             게시글 삭제
           </Button>
+          <Modal
+            title={<p>삭제하시겠습니까?</p>}
+            open={modalOpen}
+            footer={<Button onClick={deleteData}>확인</Button>}
+            onCancel={() => setModalOpen(false)}
+            maskClosable={false}
+          >
+            <p>삭제하시려면 비밀번호를 입력한 후 확인 버튼을 눌러주세요.</p>
+            <label>비밀번호:&nbsp;&nbsp;&nbsp;</label>
+            <Input
+              value={inputPw}
+              onChange={(e) => {
+                setInputPw(e.target.value);
+              }}
+              style={{ width: "200px" }}
+            />
+          </Modal>
           <Button
             className="delBt"
             onClick={() => {
