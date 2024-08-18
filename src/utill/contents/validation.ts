@@ -1,10 +1,10 @@
 /**
- *
- * @param writer
- * @param pw
- * @param title
- * @param textArea
- * @returns
+ * 게시글을 올릴 수 있는지 유효성을 검사하는 함수입니다.
+ * @param writer 작성자
+ * @param pw 비밀번호
+ * @param title 제목
+ * @param textArea 게시할 내용
+ * @returns boolean
  */
 export const isValidContent = (
   writer: string,
@@ -18,6 +18,16 @@ export const isValidContent = (
     isValidTitle(title) &&
     isValidTextarea(textArea)
   );
+};
+
+/**
+ * 게시글을 수정할 수 있는지 유효성을 검사하는 함수입니다.
+ * @param title 제목
+ * @param textArea 게시할 내용
+ * @returns boolean
+ */
+export const isValidModify = (title: string, textArea: string): boolean => {
+  return isValidTitle(title) && isValidTextarea(textArea);
 };
 
 export const isValidNickname = (writer: string): boolean => {
