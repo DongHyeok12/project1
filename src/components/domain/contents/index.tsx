@@ -1,8 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ContentsDetailType } from "type/contents";
-import axios from "axios";
 import { Pagination } from "antd";
+import { getContent } from "api/contents/getContent";
 interface pageIdType {
   pageId: string;
 }
@@ -21,16 +21,15 @@ const ContentsList = (props: pageIdType) => {
     if (page === 0) {
       setPageNum({ page: "1" });
     }
-    axios
-      .get("http://localhost:3308/" + pageId)
-      .then((res) => {
-        sortData(res.data);
-        setTotalItems(res.data.length);
-        setContentsList(res.data.slice((page - 1) * 15, page * 15));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const fetchData = async () => {
+      const response = await getContent(`/${pageId}`);
+      if (response) {
+        sortData(response);
+        setTotalItems(response.length);
+        setContentsList(response.slice((page - 1) * 15, page * 15));
+      }
+    };
+    fetchData();
   }, [page, pageId, pageNum, setPageNum]);
 
   return (
