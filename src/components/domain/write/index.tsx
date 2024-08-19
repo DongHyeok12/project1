@@ -2,7 +2,6 @@ import { Button, Col, Form, Input, Row } from "antd";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { links } from "constant";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { quillModules, quillToolbar } from "utill/quill/configQuill";
@@ -73,7 +72,7 @@ const WriteArea = () => {
 
   useEffect(() => {
     const fetchContentNum = async () => {
-      const response = await getContent("http://localhost:3308/" + pageId);
+      const response = await getContent(`/${pageId}`);
       if (response) {
         const lastContentNum = Number(response[response.length - 1].id);
         setFormData((prevData: ContentsDetailType) => ({
