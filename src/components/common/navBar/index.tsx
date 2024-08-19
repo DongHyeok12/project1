@@ -40,7 +40,8 @@ const NavBar = (props: navBarProps) => {
             key={pathLabel.path}
             className={`NavBar${
               props.path.startsWith(pathLabel.path) ||
-              props.path.endsWith(pathLabel.path)
+              props.path.endsWith(pathLabel.path) ||
+              props.path.includes(pathLabel.path)
                 ? " selected"
                 : ""
             }`}
