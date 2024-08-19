@@ -85,14 +85,17 @@ const ModifyArea = () => {
   }, [formData]);
 
   useEffect(() => {
-    if (quillRef.current && data) {
-      quillRef.current
-        .getEditor()
-        .setContents(
-          quillRef.current.getEditor().clipboard.convert(data.textArea) || {}
-        );
-    }
-  }, [data]);
+    const quillData = async () => {
+      if (quillRef.current && data) {
+        await quillRef.current
+          .getEditor()
+          .setContents(
+            quillRef.current.getEditor().clipboard.convert(data.textArea) || {}
+          );
+      }
+    };
+    quillData();
+  }, [data, modalOpen]);
 
   if (loading)
     return (
