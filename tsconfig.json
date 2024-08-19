@@ -9,7 +9,8 @@
       "constant/*": ["constant/*"],
       "recoil/*": ["recoil/*"],
       "type/*": ["type/*"],
-      "api/*": ["api/*"]
+      "api/*": ["api/*"],
+      "utill/*": ["utill/*"]
     },
     "target": "es6", // ES6로 설정
     "lib": ["dom", "dom.iterable", "esnext"],
