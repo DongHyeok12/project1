@@ -8,7 +8,7 @@ import { links } from "constant/index";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ContentsDetailType } from "type/contents";
 import { quillModules, quillToolbar } from "utill/quill/configQuill";
-import { isValidModify } from "utill/contents/validation";
+import { isValidModify } from "utill/validation/contents";
 
 const ModifyArea = () => {
   const { pageId, contentsNumber } = useParams<{

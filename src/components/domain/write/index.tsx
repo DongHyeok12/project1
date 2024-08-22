@@ -7,10 +7,10 @@ import "react-quill/dist/quill.snow.css";
 import { quillModules, quillToolbar } from "utill/quill/configQuill";
 import { dateToString } from "utill/dateFomat";
 import { postContent } from "api/contents/postContent";
-import { isValidContent } from "utill/contents/validation";
 import { ContentsDetailType } from "type/contents";
 import { encryptPw } from "api/password";
 import { getContent } from "api/contents/getContent";
+import { isValidContent } from "utill/validation/contents";
 
 const WriteArea = () => {
   const nav = useNavigate();
@@ -74,7 +74,9 @@ const WriteArea = () => {
     const fetchContentNum = async () => {
       const response = await getContent(`/${pageId}`);
       if (response) {
-        const lastContentNum = Number(response[response.length - 1].id);
+        const lastContentNum = response.length
+          ? Number(response[response.length - 1].id)
+          : 0;
         setFormData((prevData: ContentsDetailType) => ({
           ...prevData,
           id: String(lastContentNum + 1),
