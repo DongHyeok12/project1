@@ -7,6 +7,7 @@ import { decryptPw } from "api/password";
 import { deleteContent } from "api/contents/deleteContent";
 import { getContent } from "api/contents/getContent";
 import { patchContent } from "api/contents/patchContent";
+import { isValidComment } from "utill/validation/contents";
 
 const DetailContents = () => {
   const { pageId, contentsNumber } = useParams();
@@ -14,13 +15,17 @@ const DetailContents = () => {
   const [loading, setLoading] = useState(true);
   const [inputPw, setInputPw] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [comment, setComment] = useState("");
+  const [cmtWriter, setcmtWriter] = useState("");
+  const [cmtPw, setCmtPw] = useState("");
+  const { TextArea } = Input;
   const nowPage = links.find((link) => link.path === "/" + pageId) || {
     path: "",
     label: "알 수 없는",
   };
   const nav = useNavigate();
 
-  function deleteData() {
+  const deleteData = () => {
     if (data) {
       const isPass = decryptPw(data.pw) === inputPw;
       if (inputPw === "") {
@@ -35,8 +40,15 @@ const DetailContents = () => {
         setModalOpen(false);
       }
     }
-  }
+  };
 
+  const postComment = () => {
+    if (isValidComment(cmtWriter, cmtPw, comment)) {
+      alert("댓글 달기 성공!");
+    } else {
+      alert("댓글 달기 실패!");
+    }
+  };
   useEffect(() => {
     //db에서 해당 데이터 받아오기
     const fecthData = async () => {
@@ -103,6 +115,8 @@ const DetailContents = () => {
             <label>비밀번호:&nbsp;&nbsp;&nbsp;</label>
             <Input
               value={inputPw}
+              minLength={1}
+              maxLength={20}
               onChange={(e) => {
                 setInputPw(e.target.value);
               }}
@@ -124,7 +138,40 @@ const DetailContents = () => {
           dangerouslySetInnerHTML={{ __html: data.textArea }}
           className="contentText"
         />
-        <div className="commentArea">댓글</div>
+        <div className="commentArea">
+          <div className="commentTitle">댓글</div>
+          <div className="commentRow">안녕하세요</div>
+          <div className="commentRow">
+            <label className="commentLabel">닉네임 </label>
+            <Input
+              className="commentInput"
+              placeholder="8글자 이하"
+              onChange={(e) => {
+                setcmtWriter(e.target.value);
+              }}
+            />{" "}
+            <label className="commentLabel">PW </label>
+            <Input.Password
+              onChange={(e) => {
+                setCmtPw(e.target.value);
+              }}
+              className="commentInput"
+              placeholder="4~10글자 사이"
+            />
+            <TextArea
+              className="commentTextArea"
+              showCount
+              maxLength={300}
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              style={{ resize: "none" }}
+            />
+            <Button onClick={postComment} className="commentButton">
+              등록
+            </Button>
+          </div>
+        </div>
       </div>
     </>
   );
