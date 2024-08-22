@@ -12,11 +12,11 @@ const ContentsList = (props: pageIdType) => {
   const { pageId } = props;
   const [pageNum, setPageNum] = useSearchParams({ page: "1" });
   const page = Number(pageNum.get("page"));
-  function sortData(data: ContentsDetailType[]) {
+  const sortData = (data: ContentsDetailType[]) => {
     data.sort(function (a: ContentsDetailType, b: ContentsDetailType) {
       return Number(b.id) - Number(a.id);
     });
-  }
+  };
   useEffect(() => {
     if (page === 0) {
       setPageNum({ page: "1" });
@@ -32,27 +32,31 @@ const ContentsList = (props: pageIdType) => {
     fetchData();
   }, [page, pageId, pageNum, setPageNum]);
 
+  if (!contentsList.length) {
+    return <p>첫 게시글을 작성해 주세요!</p>;
+  }
+
   return (
     <>
-      <table>
-        <thead className="ListBox">
+      <table className="contents-table">
+        <thead className="contents-ListBox">
           <tr>
-            <th className="thNum">번호</th>
-            <th className="thTitle">제목</th>
-            <th className="thWriter">작성자</th>
-            <th className="thView">조회수</th>
+            <th className="contents-thNum">번호</th>
+            <th className="contents-thTitle">제목</th>
+            <th className="contents-thWriter">작성자</th>
+            <th className="contents-thView">조회수</th>
           </tr>
         </thead>
         <tbody>
           {contentsList.map((v) => (
             <tr key={v.id}>
-              <td className="thNum">{v.id}</td>
-              <td className="thTitle">
+              <td className="contents-thNum">{v.id}</td>
+              <td className="contents-thTitle">
                 <Link to={`/${pageId}/${v.id}`}>{v.title}</Link>{" "}
                 <span className="time">{v.time}</span>
               </td>
-              <td className="thWriter">{v.writer}</td>
-              <td className="thView">{v.view}</td>
+              <td className="contents-thWriter">{v.writer}</td>
+              <td className="contents-thView">{v.view}</td>
             </tr>
           ))}
         </tbody>

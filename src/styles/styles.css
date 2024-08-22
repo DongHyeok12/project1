@@ -97,11 +97,6 @@ a:active {
   background-color: goldenrod;
 }
 
-/* ListBox.css */
-.ListBox {
-  display: grid;
-}
-
 /* SubHead.css */
 .SubHead {
   background-color: white; /* 배경색 */
@@ -143,49 +138,59 @@ a:active {
   place-self: center;
 }
 
-/*thead.css*/
-table {
+/* ContentsList.css */
+.contents-table {
   display: inline-block;
   table-layout: fixed;
   align-content: center;
 }
-thead {
+
+.contents-table thead {
   border-bottom: 2px solid gold;
 }
-th {
+
+.contents-table th {
   height: 30px;
   font-size: 22px;
 }
 
-th:last-child {
+.contents-table th:last-child {
   border-right: none;
 }
-td {
+
+.contents-table td {
   height: 30px;
   border-bottom: 1px solid gainsboro;
   font-size: 18px;
 }
-td:last-child {
+
+.contents-table td:last-child {
   border-right: none;
 }
-.thNum {
+
+.contents-thNum {
   width: 8vw;
   text-align: center;
 }
 
-.thTitle {
+.contents-thTitle {
   width: 36vw;
 }
 
-.thWriter {
+.contents-thWriter {
   width: 12vw;
   text-align: center;
 }
 
-.thView {
+.contents-thView {
   width: 6vw;
   text-align: center;
 }
+
+.contents-ListBox {
+  display: grid;
+}
+
 /* postarea.css */
 
 .PostArea {
@@ -273,10 +278,47 @@ td:last-child {
 /* commentArea.css */
 .commentArea {
   margin-top: 30px;
-  padding-bottom: 10px;
+  width: 100%;
+  display: block;
+}
+
+.commentTitle {
   font-weight: bolder;
   font-size: 18px;
   border-bottom: 2px solid #ffd700;
+  padding-bottom: 10px;
+}
+
+.commentRow {
+  width: 100%;
+  margin-top: 10px;
+  border-bottom: 2px solid gainsboro;
+}
+
+.commentRow:last-child {
+  border-bottom: none;
+}
+
+.commentTextArea {
+  height: 80px;
+  width: 100%;
+  font-size: 12px;
+}
+
+.commentButton {
+  height: 20px;
+  width: 60px;
+  margin-top: 5px;
+}
+
+.commentLabel {
+  font-size: 12px;
+}
+
+.commentInput {
+  width: 120px;
+  height: 25px;
+  font-size: 12px;
 }
 
 /* pagination.css */
